@@ -15,7 +15,7 @@ export default async function Signin() {
 
   return (
     <>
-      <Title text="Next.js Auth Template" />
+      <Title text="運動火腿" />
       <SigninForm />
       <GoogleSigninButton />
       <FacebookSigninButton />

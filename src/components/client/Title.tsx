@@ -23,10 +23,7 @@ export default function Title(props: TitleProps) {
             <Box />
           )}
           {showGithub && (
-            <Link
-              href="https://github.com/Dannyisadog/nextjs-authjs-template"
-              target="_blank"
-            >
+            <Link href="https://github.com/Dannyisadog/undou" target="_blank">
               <GitHubIcon />
             </Link>
           )}

@@ -7,28 +7,26 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
-  title: "Next.js Auth Template",
-  description:
-    "A robust template for Next.js with integrated authentication and authorization.",
+  title: "運動火腿",
+  description: "大家一起來運動",
   keywords:
-    "Next.js, Auth.js, Authentication, Authorization, Template, Web Development",
+    "運動, 羽球, 籃球, 棒球, 網球, 足球, 棒球, 桌球, 撞球, 游泳, 滑板, 滑雪, 滑冰, 滑輪, 滑板, 滑水, 滑翔",
   openGraph: {
     type: "website",
-    url: "https://nextauth.dannyisadog.com",
-    title: "Next.js Auth Template",
-    description:
-      "A robust template for Next.js with integrated authentication and authorization.",
+    url: "https://undou.dannyisadog.com",
+    title: "運動火腿",
+    description: "大家一起來運動",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Next.js Auth Template",
+        alt: "運動火腿",
       },
     ],
   },
   alternates: {
-    canonical: "https://nextauth.dannyisadog.com",
+    canonical: "https://undou.dannyisadog.com",
   },
 };
 
