@@ -1,21 +1,4 @@
-# [Next.js Auth Template](https://nextauth.dannyisadog.com)
-
-![Github Intro Image](https://nextauth.dannyisadog.com/github-intro.png)
-
-The nextjs-authjs-template is a robust starter template for building modern web applications with Next.js and Auth.js (formerly NextAuth.js). This template is designed to streamline the development process by providing a pre-configured setup that integrates user authentication and authorization seamlessly into your Next.js project.
-
-## Features:
-- FullStack [Next.js](https://nextjs.org/) application with built-in authentication.
-- User authentication with email, Google, and GitHub.
-- ORM with [Prisma](https://www.prisma.io/) for database management.
-- PostgreSQL database with Docker for easy setup.
-- Email service with [Resend](https://resend.com/) API.
-- [MUI](https://mui.com/) for styling and responsive design.
-
-
-## Use Cases:
-- Rapidly prototype and deploy Next.js applications with built-in authentication.
-- Start new projects with a solid foundation, reducing the boilerplate code required for user management.
+# [Undou](https://undou.dannyisadog.com)
 
 ## Getting Started
 
@@ -37,9 +20,6 @@ The nextjs-authjs-template is a robust starter template for building modern web 
   ...
   AUTH_GOOGLE_ID=xxxx
   AUTH_GOOGLE_SECRET=xxxx
-  
-  AUTH_GITHUB_ID=xxxx
-  AUTH_GITHUB_SECRET=xxxx
   ...
 ```
 

@@ -4,7 +4,6 @@ import NextAuth, {
   User as NextAuthUser,
 } from "next-auth";
 import Google from "next-auth/providers/google";
-import GitHub from "next-auth/providers/github";
 import Faacebook from "next-auth/providers/facebook";
 import Line from "next-auth/providers/line";
 import Credentials from "next-auth/providers/credentials";
@@ -29,9 +28,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   providers: [
     Google({
-      allowDangerousEmailAccountLinking: true,
-    }),
-    GitHub({
       allowDangerousEmailAccountLinking: true,
     }),
     Faacebook({

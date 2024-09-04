@@ -3,7 +3,6 @@ import GoogleSigninButton from "components/client/GoogleSigninButton";
 import { SigninForm } from "components/client/SigninForm";
 import { redirect } from "next/navigation";
 import Title from "components/client/Title";
-import GithubSigninButton from "components/client/GithubSigninButton";
 import FacebookSigninButton from "components/client/FacebookSigninButton";
 import LineSigninButton from "components/client/LineSigninButton";
 
@@ -19,7 +18,6 @@ export default async function Signin() {
       <Title text="Next.js Auth Template" />
       <SigninForm />
       <GoogleSigninButton />
-      <GithubSigninButton />
       <FacebookSigninButton />
       <LineSigninButton />
     </>
