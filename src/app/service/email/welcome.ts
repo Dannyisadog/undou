@@ -2,7 +2,7 @@ import SigninWelcomeEmail from "components/email/SigninWelcome";
 import { sendEmail } from ".";
 
 export const sendWelcomeEmail = async (firstName: string, email: string) => {
-  const subject = "Welcome to Next Auth Template";
+  const subject = "歡迎加入運動火腿";
 
   try {
     sendEmail({

@@ -12,27 +12,27 @@ export const VerifyEmail = (props: VerifyEmailProps) => {
       <body style={main}>
         <div style={container}>
           <img
-            src={`https://nextauth.dannyisadog.com/logo.png`}
+            src={`https://undou.dannyisadog.com/logo.png`}
             width="50"
             height="50"
-            alt="nextjs-authjs-template"
+            alt="運動火腿"
             style={logo}
           />
           <p style={paragraph}>Hi {firstName},</p>
           <p style={paragraph}>
-            Welcome to the Next.js Auth.js Template!
+            歡迎加入運動火腿！
             <br />
-            Please verify your email by clicking the button below.
+            請點擊下方按鈕驗證您的電子郵件。
           </p>
           <section style={btnContainer}>
             <a style={button} href={`${url}/verification?token=${token}`}>
-              Verify email
+              驗證電子郵件
             </a>
           </section>
           <p style={paragraph}>
-            Best,
+            感謝您的加入，我們期待與您一起運動！
             <br />
-            Next.js Authentication Template Team
+            運動火腿團隊
           </p>
         </div>
       </body>

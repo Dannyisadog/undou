@@ -13,27 +13,23 @@ export const ResetPasswordEmail = (props: ResetPasswordEmailProps) => {
       <body style={main}>
         <div style={container}>
           <img
-            src={`https://nextauth.dannyisadog.com/logo.png`}
+            src={`https://undou.dannyisadog.com/logo.png`}
             width="50"
             height="50"
-            alt="nextjs-authjs-template"
+            alt="運動火腿"
             style={logo}
           />
           <p style={paragraph}>Hi {firstName},</p>
           <p style={paragraph}>
-            We received a request to reset your password. If you didn{"'"}t make
-            the request, you can ignore this email.
+            您收到此封信是因為我們收到了您的密碼重設請求。
+            如果您沒有發出此請求，請忽略此封信。
           </p>
           <section style={btnContainer}>
             <a style={button} href={`${url}/resetPassword?token=${token}`}>
-              Reset password
+              重設密碼
             </a>
           </section>
-          <p style={paragraph}>
-            Best,
-            <br />
-            Nextjs Authjs Template Team
-          </p>
+          <p style={paragraph}>運動火腿團隊</p>
         </div>
       </body>
     </html>

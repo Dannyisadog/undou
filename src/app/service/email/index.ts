@@ -13,7 +13,7 @@ export const sendEmail = async (
   params: EmailParams
 ): Promise<CreateEmailResponseSuccess | null> => {
   const {
-    from = "Next Auth Template <no-reply@nextauth.dannyisadog.com>",
+    from = "運動火腿 <no-reply@undou.dannyisadog.com>",
     to,
     subject,
     template,
