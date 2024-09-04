@@ -23,23 +23,23 @@ export default function ResetPasswordForm() {
         e.preventDefault();
 
         if (!password) {
-          setError("password is required");
+          setError("請輸入密碼");
           return;
         }
 
         if (password.length < 8) {
-          setError("Password must be at least 8 characters");
+          setError("密碼長度至少為 8 個字元");
           setLoading(false);
           return;
         }
 
         if (!passwordConfirm) {
-          setError("password-confirm is required");
+          setError("請輸入確認密碼");
           return;
         }
 
         if (password !== passwordConfirm) {
-          setError("Passwords do not match");
+          setError("密碼不一致");
           return;
         }
 
@@ -79,9 +79,7 @@ export default function ResetPasswordForm() {
         {success && (
           <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
             <Stack direction="row" spacing={0.5}>
-              <Typography variant="body2">
-                Password reset successfully
-              </Typography>
+              <Typography variant="body2">成功重設密碼，請重新登入</Typography>
               <Box color="primary.dark">
                 <Link href="/signin">/signin</Link>
               </Box>
@@ -93,7 +91,7 @@ export default function ResetPasswordForm() {
           fullWidth
           type="password"
           name="password"
-          placeholder="password"
+          placeholder="密碼"
           onChange={(e) => {
             setPassword(e.target.value);
           }}
@@ -103,13 +101,13 @@ export default function ResetPasswordForm() {
           fullWidth
           type="password"
           name="password-confirm"
-          placeholder="password-confirm"
+          placeholder="確認密碼"
           onChange={(e) => {
             setPasswordConfirm(e.target.value);
           }}
         />
         <Button isLoading={loading} fullWidth type="submit" variant="contained">
-          <Typography>Reset Password</Typography>
+          <Typography color="white">重設密碼</Typography>
         </Button>
       </Stack>
     </form>

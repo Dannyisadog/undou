@@ -17,7 +17,7 @@ export default function SendForgotPasswordLinkForm() {
         e.preventDefault();
 
         if (!email) {
-          setError("email is required");
+          setError("請輸入電子信箱");
           return;
         }
 
@@ -45,19 +45,19 @@ export default function SendForgotPasswordLinkForm() {
     >
       <Stack spacing={2}>
         {error && <Alert severity="error">{error}</Alert>}
-        {success && <Alert severity="success">Email sent</Alert>}
+        {success && <Alert severity="success">密碼重設信已寄出</Alert>}
         <TextField
           fullWidth
           value={email}
           type="email"
           name="email"
-          placeholder="email"
+          placeholder="電子信箱"
           onChange={(e) => {
             setEmail(e.target.value);
           }}
         />
         <Button isLoading={loading} fullWidth type="submit" variant="contained">
-          <Typography>Send Reset Password Link</Typography>
+          <Typography color="white">取得密碼重設信</Typography>
         </Button>
       </Stack>
     </form>

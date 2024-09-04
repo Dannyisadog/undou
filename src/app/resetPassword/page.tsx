@@ -5,7 +5,7 @@ import { Suspense } from "react";
 export default function ResetPasswordPage() {
   return (
     <>
-      <Title text="Reset password" />
+      <Title text="重設密碼" />
       <Suspense fallback={<></>}>
         <ResetPasswordForm />
       </Suspense>

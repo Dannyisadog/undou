@@ -27,7 +27,7 @@ export default function FacebookSigninButton() {
           height={24}
           priority
         />
-        <Typography>Sign in with Facebook</Typography>
+        <Typography>透過 Facebook 進行登入</Typography>
       </Stack>
     </Button>
   );

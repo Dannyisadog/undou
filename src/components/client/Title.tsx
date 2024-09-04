@@ -28,7 +28,9 @@ export default function Title(props: TitleProps) {
             </Link>
           )}
         </Stack>
-        <Typography variant="h4">{text}</Typography>
+        <Typography variant="h4" color="primary">
+          {text}
+        </Typography>
       </Stack>
     </Stack>
   );
