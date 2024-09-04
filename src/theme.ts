@@ -15,7 +15,7 @@ const { fontFamily } = poppins.style;
 export const theme = createTheme({
   palette: {
     primary: {
-      main: "#0773f7",
+      main: "#F1712A",
     },
   },
   typography: {
