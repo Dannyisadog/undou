@@ -23,25 +23,25 @@ export default function RegisterForm() {
         e.preventDefault();
 
         if (username.length < 3) {
-          setError("Username must be at least 3 characters");
+          setError("使用者名稱至少要有 3 個字元");
           setLoading(false);
           return;
         }
 
         if (!email.includes("@")) {
-          setError("Invalid email");
+          setError("電子信箱格式錯誤");
           setLoading(false);
           return;
         }
 
         if (password.length < 8) {
-          setError("Password must be at least 8 characters");
+          setError("密碼至少要有 8 個字元");
           setLoading(false);
           return;
         }
 
         if (password !== passwordConfirm) {
-          setError("Passwords do not match");
+          setError("密碼不一致");
           setLoading(false);
           return;
         }
@@ -66,7 +66,7 @@ export default function RegisterForm() {
           setPassword("");
           setPasswordConfirm("");
         } else {
-          setError("Error creating account");
+          setError("註冊失敗，請聯絡管理員");
         }
       }}
     >
@@ -75,9 +75,7 @@ export default function RegisterForm() {
         {success && (
           <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
             <Stack direction="row" spacing={0.5}>
-              <Typography variant="body2">
-                Account created successfully
-              </Typography>
+              <Typography variant="body2">註冊成功，請前往登入</Typography>
               <Box color="primary.dark">
                 <Link href="/signin">/signin</Link>
               </Box>
@@ -89,7 +87,7 @@ export default function RegisterForm() {
           fullWidth
           type="text"
           name="username"
-          placeholder="username"
+          placeholder="使用者名稱"
           onChange={(e) => {
             setUsername(e.target.value);
           }}
@@ -99,7 +97,7 @@ export default function RegisterForm() {
           fullWidth
           type="email"
           name="email"
-          placeholder="email"
+          placeholder="電子信箱"
           onChange={(e) => {
             setEmail(e.target.value);
           }}
@@ -109,7 +107,7 @@ export default function RegisterForm() {
           fullWidth
           type="password"
           name="password"
-          placeholder="password"
+          placeholder="密碼"
           onChange={(e) => {
             setPassword(e.target.value);
           }}
@@ -119,13 +117,13 @@ export default function RegisterForm() {
           fullWidth
           type="password"
           name="password-confirm"
-          placeholder="password-confirm"
+          placeholder="確認密碼"
           onChange={(e) => {
             setPasswordConfirm(e.target.value);
           }}
         />
         <Button isLoading={loading} fullWidth type="submit" variant="contained">
-          <Typography>Register</Typography>
+          <Typography color="white">註冊</Typography>
         </Button>
       </Stack>
     </form>

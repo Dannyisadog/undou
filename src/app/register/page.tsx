@@ -4,7 +4,7 @@ import Title from "components/client/Title";
 export default async function Signin() {
   return (
     <>
-      <Title text="Register" hasGoBack />
+      <Title text="註冊" hasGoBack />
       <RegisterForm />
     </>
   );
