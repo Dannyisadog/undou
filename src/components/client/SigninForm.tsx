@@ -93,7 +93,7 @@ export function SigninForm() {
           </Link>
         </Stack>
         <Button isLoading={loading} fullWidth type="submit" variant="contained">
-          <Typography>Sign in</Typography>
+          <Typography color="white">Sign in</Typography>
         </Button>
       </Stack>
     </form>

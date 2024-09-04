@@ -13,6 +13,9 @@ export default function SignoutButton() {
         setLoading(true);
         signOut();
       }}
+      sx={{
+        color: "white",
+      }}
     >
       Sign out
     </Button>
