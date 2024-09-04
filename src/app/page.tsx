@@ -3,7 +3,6 @@ import { auth, CustomSession } from "auth";
 import { redirect } from "next/navigation";
 import { Alert, AlertTitle, Stack, Typography } from "@mui/material";
 import Title from "components/client/Title";
-import UserList from "components/client/UserList";
 import UserAvatar from "components/client/UserAvatar";
 import Provider from "providers/Provider";
 
@@ -35,8 +34,6 @@ export default async function Home() {
         </Typography>
       </Stack>
       <SignoutButton />
-      <Title text="Users" showGithub={false} />
-      <UserList />
     </Provider>
   );
 }
