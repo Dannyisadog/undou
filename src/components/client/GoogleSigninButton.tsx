@@ -27,7 +27,7 @@ export default function GoogleSigninButton() {
           height={24}
           priority
         />
-        <Typography>Sign in with Google</Typography>
+        <Typography>透過 Google 進行登入</Typography>
       </Stack>
     </Button>
   );

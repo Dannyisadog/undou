@@ -25,19 +25,19 @@ export function SigninForm() {
         e.preventDefault();
 
         if (!email) {
-          setError("email is required");
+          setError("請輸入電子信箱");
           setLoading(false);
           return;
         }
 
         if (!email.includes("@")) {
-          setError("email is not valid");
+          setError("電子信箱格式錯誤");
           setLoading(false);
           return;
         }
 
         if (!password) {
-          setError("password is required");
+          setError("請輸入密碼");
           setLoading(false);
           return;
         }
@@ -50,7 +50,7 @@ export function SigninForm() {
         });
 
         if (result?.error) {
-          setError("email or password is incorrect");
+          setError("電子信箱或密碼錯誤");
         }
 
         if (!result?.error) {
@@ -66,7 +66,7 @@ export function SigninForm() {
           fullWidth
           type="email"
           name="email"
-          placeholder="email"
+          placeholder="電子信箱"
           onChange={(e) => {
             setEmail(e.target.value);
           }}
@@ -75,7 +75,7 @@ export function SigninForm() {
           fullWidth
           type="password"
           name="password"
-          placeholder="password"
+          placeholder="密碼"
           onChange={(e) => {
             setPassword(e.target.value);
           }}
@@ -83,17 +83,17 @@ export function SigninForm() {
         <Stack direction="row" justifyContent="space-between">
           <Link href="/forgotPassword">
             <Typography variant="body2" color="primary">
-              Forgot password?
+              忘記密碼?
             </Typography>
           </Link>
           <Link href="/register">
             <Typography variant="body2" color="primary">
-              Register
+              註冊
             </Typography>
           </Link>
         </Stack>
         <Button isLoading={loading} fullWidth type="submit" variant="contained">
-          <Typography color="white">Sign in</Typography>
+          <Typography color="white">登入</Typography>
         </Button>
       </Stack>
     </form>

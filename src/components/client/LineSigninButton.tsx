@@ -21,7 +21,7 @@ export default function LineSigninButton() {
     >
       <Stack direction="row" spacing={1}>
         <Image src="/ic-line.png" alt="Line" width={24} height={24} priority />
-        <Typography>Sign in with Line</Typography>
+        <Typography>透過 Line 進行登入</Typography>
       </Stack>
     </Button>
   );
