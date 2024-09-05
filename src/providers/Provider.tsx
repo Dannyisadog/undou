@@ -8,7 +8,7 @@ import { CustomSession } from "auth";
 
 interface ProviderProps {
   children: React.ReactNode;
-  session: CustomSession;
+  session?: CustomSession;
 }
 
 const ProviderContext = createContext<ProviderContextType>(
@@ -20,7 +20,9 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 const Provider = (props: ProviderProps) => {
   const { children, session } = props;
 
-  const [currentSession, setCurrentSession] = useState<CustomSession>(session);
+  const [currentSession, setCurrentSession] = useState<
+    CustomSession | undefined
+  >(session);
 
   const [users, setUsers] = useState<User[]>([]);
 
