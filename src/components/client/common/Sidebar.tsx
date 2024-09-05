@@ -127,7 +127,7 @@ export default function Sidebar(props: SidebarProps) {
     <Box
       sx={{
         zIndex: 100,
-        width: 220,
+        width: 250,
         height: "100vh",
         backgroundColor: "#0c254c",
         overflowY: "scroll",

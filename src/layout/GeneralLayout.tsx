@@ -25,7 +25,7 @@ export default function GeneralLayout(props: GeneralLayoutProps) {
       <Drawer open={isOpen} onClose={onClose} />
       <Box
         sx={{
-          pl: isDesktopSize ? "220px" : 0,
+          pl: isDesktopSize ? "250px" : 0,
         }}
       >
         {children}
