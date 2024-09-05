@@ -6,6 +6,11 @@ import Title from "components/client/Title";
 import UserAvatar from "components/client/UserAvatar";
 import Provider from "providers/Provider";
 import GeneralLayout from "layout/GeneralLayout";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "運動火腿 - 個人資訊",
+};
 
 export default async function ProfilePage() {
   const session = (await auth()) as CustomSession;

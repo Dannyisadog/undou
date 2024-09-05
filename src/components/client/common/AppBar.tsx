@@ -43,7 +43,7 @@ export default function AppBar(props: AppBarProps) {
           <Stack
             direction="row"
             alignItems="center"
-            maxWidth={isDesktopSize ? 220 : "auto"}
+            maxWidth={isDesktopSize ? 250 : "auto"}
           >
             {isDesktopSize && (
               <Link href="/">
