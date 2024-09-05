@@ -1,21 +1,15 @@
 "use client";
 
-import {
-  Box,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Divider, List, Stack, Typography } from "@mui/material";
 import { DARK_BLUE, PRIMARY } from "colors";
-import { useDisclosure } from "hooks/useDisclosure";
 import { useScreenSize } from "hooks/useScreenSize";
 import Image from "next/image";
-import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useProvider } from "providers/Provider";
+import SidebarItem from "./SidebarItem";
+import AddBoxIcon from "@mui/icons-material/AddBox";
+import ChecklistIcon from "@mui/icons-material/Checklist";
+import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 
 type SidebarItem = {
   type: string;
@@ -158,43 +152,37 @@ export default function Sidebar(props: SidebarProps) {
         </Stack>
       )}
       <List>
+        <SidebarItem
+          href="/activity/create"
+          text="新增活動"
+          icon={<AddBoxIcon />}
+        />
+        <SidebarItem
+          href="/activity/joined"
+          text="已參加的活動"
+          icon={<ChecklistIcon />}
+        />
+        <SidebarItem
+          href="/activity/created"
+          text="我發起的活動"
+          icon={<EmojiPeopleIcon />}
+        />
+        <Divider
+          sx={{
+            my: 2,
+            backgroundColor: "#ffffff44",
+          }}
+        />
         {items.map((item) => (
-          <Link
-            href={getHref(item.type)}
+          <SidebarItem
             key={item.type}
+            text={item.label}
+            active={isActive(item.type)}
+            href={getHref(item.type)}
             onClick={() => {
               isMobileSize && closeDrawer();
             }}
-          >
-            <ListItem
-              sx={{
-                height: 48,
-              }}
-            >
-              <ListItemButton
-                sx={{
-                  py: 0.5,
-                  borderRadius: 5,
-                  backgroundColor: isActive(item.type)
-                    ? "white"
-                    : "transparent",
-                  color: isActive(item.type) ? PRIMARY.main : "white",
-                  "&:hover": {
-                    backgroundColor: isActive(item.type)
-                      ? "white"
-                      : "rgba(255, 255, 255, 0.15)",
-                  },
-                }}
-              >
-                <Typography
-                  fontWeight={isActive(item.type) ? 600 : "normal"}
-                  fontSize={isActive(item.type) ? "1.2rem" : "1rem"}
-                >
-                  {item.label}
-                </Typography>
-              </ListItemButton>
-            </ListItem>
-          </Link>
+          />
         ))}
       </List>
     </Box>
