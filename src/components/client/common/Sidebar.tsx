@@ -128,9 +128,8 @@ export default function Sidebar() {
     >
       <List>
         {items.map((item) => (
-          <Link href={getHref(item.type)}>
+          <Link href={getHref(item.type)} key={item.type}>
             <ListItem
-              key={item.type}
               sx={{
                 height: 48,
               }}
