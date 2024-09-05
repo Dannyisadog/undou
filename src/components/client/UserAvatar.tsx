@@ -12,7 +12,7 @@ import { useProvider } from "providers/Provider";
 const UserAvatar = () => {
   const { session } = useProvider();
 
-  const { authUser } = session;
+  const authUser = session?.authUser;
 
   const { isOpen, onClose, onOpen } = useDisclosure();
 
