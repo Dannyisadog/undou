@@ -8,6 +8,7 @@ import { SigninForm } from "../SigninForm";
 import GoogleSigninButton from "../GoogleSigninButton";
 import FacebookSigninButton from "../FacebookSigninButton";
 import LineSigninButton from "../LineSigninButton";
+import SigninImage from "./signin-image.svg";
 
 export default function Signin() {
   const { isDesktopSize } = useScreenSize();
@@ -29,7 +30,7 @@ export default function Signin() {
             priority
             width={434}
             height={508}
-            src="/signin-image.png"
+            src={SigninImage}
             alt="登入頁面"
           />
           <Typography variant="h6">來當個運動火腿</Typography>
