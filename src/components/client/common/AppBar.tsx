@@ -15,6 +15,7 @@ import Link from "next/link";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useProvider } from "providers/Provider";
 import multiavatar from "@multiavatar/multiavatar/esm";
+import Button from "../Button";
 
 interface AppBarProps {
   openDrawer: () => void;
@@ -27,9 +28,9 @@ export default function AppBar(props: AppBarProps) {
 
   const { session } = useProvider();
 
-  const { authUser } = session;
+  const authUser = session?.authUser;
 
-  const svgCode = multiavatar(authUser.email as string);
+  const svgCode = multiavatar(authUser?.email as string);
 
   return (
     <MuiAppBar position="fixed" elevation={4}>
@@ -81,7 +82,7 @@ export default function AppBar(props: AppBarProps) {
           <TextField
             variant="outlined"
             size="small"
-            placeholder="搜尋活動"
+            placeholder="搜尋活動類型或名稱..."
             InputProps={{ sx: { borderRadius: 8, fontSize: 14, px: 1 } }}
             sx={{
               maxWidth: isDesktopSize ? 400 : 300,
@@ -90,50 +91,63 @@ export default function AppBar(props: AppBarProps) {
           />
         </Stack>
         <Stack>
-          <Link href="/profile">
-            <Box
-              sx={{
-                ml: 1,
-              }}
-            >
-              <Stack
-                direction="row"
-                alignItems="center"
-                spacing={1}
-                justifyContent="end"
+          {session ? (
+            <Link href="/profile">
+              <Box
+                sx={{
+                  ml: 1,
+                }}
               >
-                {session.authUser.image && (
-                  <Box
-                    sx={{
-                      borderRadius: 100,
-                      overflow: "hidden",
-                      width: 28,
-                      height: 28,
-                    }}
-                  >
-                    <Image
-                      width={28}
-                      height={28}
-                      src={session?.authUser?.image}
-                      alt="Profile"
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  spacing={1}
+                  justifyContent="end"
+                >
+                  {session?.authUser.image && (
+                    <Box
+                      sx={{
+                        borderRadius: 100,
+                        overflow: "hidden",
+                        width: 28,
+                        height: 28,
+                      }}
+                    >
+                      <Image
+                        width={28}
+                        height={28}
+                        src={session?.authUser?.image}
+                        alt="Profile"
+                      />
+                    </Box>
+                  )}
+                  {!session?.authUser.image && (
+                    <Box
+                      dangerouslySetInnerHTML={{ __html: svgCode }}
+                      width={24}
+                      height={24}
                     />
-                  </Box>
-                )}
-                {!session.authUser.image && (
-                  <Box
-                    dangerouslySetInnerHTML={{ __html: svgCode }}
-                    width={24}
-                    height={24}
-                  />
-                )}
-                {isDesktopSize && (
-                  <Typography fontWeight="bold">
-                    {session.authUser.name}
-                  </Typography>
-                )}
-              </Stack>
-            </Box>
-          </Link>
+                  )}
+                  {isDesktopSize && (
+                    <Typography fontWeight="bold">
+                      {session?.authUser.name}
+                    </Typography>
+                  )}
+                </Stack>
+              </Box>
+            </Link>
+          ) : (
+            <Link href="/signin">
+              <Button
+                variant="outlined"
+                sx={{
+                  height: 36,
+                }}
+              >
+                <Typography fontWeight={600}>登入</Typography>
+              </Button>
+            </Link>
+          )}
         </Stack>
       </Toolbar>
     </MuiAppBar>

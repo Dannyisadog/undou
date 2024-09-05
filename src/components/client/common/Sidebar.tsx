@@ -9,7 +9,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { PRIMARY } from "colors";
+import { DARK_BLUE, PRIMARY } from "colors";
 import { useDisclosure } from "hooks/useDisclosure";
 import { useScreenSize } from "hooks/useScreenSize";
 import Image from "next/image";
@@ -23,7 +23,7 @@ type SidebarItem = {
   description: string;
 };
 
-const items: SidebarItem[] = [
+export const items: SidebarItem[] = [
   {
     type: "all",
     label: "全部",
@@ -129,7 +129,7 @@ export default function Sidebar(props: SidebarProps) {
         zIndex: 100,
         width: 250,
         height: "100vh",
-        backgroundColor: "#0c254c",
+        backgroundColor: DARK_BLUE,
         overflowY: "scroll",
         pt: 2,
         pb: 6,
@@ -140,21 +140,23 @@ export default function Sidebar(props: SidebarProps) {
       position={isMobileSize ? "relative" : "fixed"}
       role="presentation"
     >
-      <Stack
-        px={2}
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        <Image
-          priority
-          width={40}
-          height={40}
-          src="/appbar-logo.png"
-          alt="運動火腿"
-        />
-        <Typography color="white">嗨! {session.authUser.name}</Typography>
-      </Stack>
+      {isMobileSize && (
+        <Stack
+          px={2}
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Image
+            priority
+            width={40}
+            height={40}
+            src="/appbar-logo.png"
+            alt="運動火腿"
+          />
+          <Typography color="white">嗨! {session?.authUser.name}</Typography>
+        </Stack>
+      )}
       <List>
         {items.map((item) => (
           <Link

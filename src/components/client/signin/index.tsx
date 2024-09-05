@@ -9,9 +9,11 @@ import GoogleSigninButton from "../GoogleSigninButton";
 import FacebookSigninButton from "../FacebookSigninButton";
 import LineSigninButton from "../LineSigninButton";
 import SigninImage from "./signin-image.svg";
+import Link from "next/link";
+import { DARK_BLUE } from "colors";
 
 export default function Signin() {
-  const { isDesktopSize } = useScreenSize();
+  const { isDesktopSize, isMobileSize } = useScreenSize();
 
   return (
     <Stack
@@ -46,6 +48,34 @@ export default function Signin() {
         <GoogleSigninButton />
         <FacebookSigninButton />
         <LineSigninButton />
+        {isMobileSize && (
+          <Stack
+            spacing={4}
+            maxWidth={400}
+            width="100%"
+            direction="row"
+            justifyContent="space-between"
+            sx={{
+              mt: "48px !important",
+            }}
+          >
+            <Link href="/">
+              <Typography variant="body2" fontWeight={600} color={DARK_BLUE}>
+                關於平台
+              </Typography>
+            </Link>
+            <Link href="/">
+              <Typography variant="body2" fontWeight={600} color={DARK_BLUE}>
+                隱私權政策
+              </Typography>
+            </Link>
+            <Link href="/">
+              <Typography variant="body2" fontWeight={600} color={DARK_BLUE}>
+                服務條款
+              </Typography>
+            </Link>
+          </Stack>
+        )}
       </Stack>
     </Stack>
   );

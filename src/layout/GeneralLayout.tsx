@@ -28,7 +28,14 @@ export default function GeneralLayout(props: GeneralLayoutProps) {
           pl: isDesktopSize ? "250px" : 0,
         }}
       >
-        {children}
+        <Stack
+          pt={4}
+          width="100%"
+          alignItems="center"
+          px={isDesktopSize ? 16 : 2}
+        >
+          {children}
+        </Stack>
       </Box>
     </Stack>
   );

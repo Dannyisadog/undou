@@ -11,3 +11,5 @@ export const PRIMARY = {
   800: "#C15520",
   900: "#A5481A",
 };
+
+export const DARK_BLUE = "#0c254c";
