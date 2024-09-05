@@ -72,15 +72,17 @@ export default function AppBar() {
         </Stack>
         <Stack>
           <Link href="/profile">
-            <Button
-              variant="outlined"
+            <Box
               sx={{
-                width: 120,
-                borderRadius: 12,
                 ml: 1,
               }}
             >
-              <Stack direction="row" alignItems="center" spacing={1}>
+              <Stack
+                direction="row"
+                alignItems="center"
+                spacing={1}
+                justifyContent="end"
+              >
                 {session.authUser.image && (
                   <Box
                     sx={{
@@ -105,9 +107,13 @@ export default function AppBar() {
                     height={24}
                   />
                 )}
-                <Typography>{session.authUser.name}</Typography>
+                {isDesktopSize && (
+                  <Typography fontWeight="bold">
+                    {session.authUser.name}
+                  </Typography>
+                )}
               </Stack>
-            </Button>
+            </Box>
           </Link>
         </Stack>
       </Toolbar>
