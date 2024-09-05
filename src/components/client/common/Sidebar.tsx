@@ -6,12 +6,16 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  Stack,
+  Typography,
 } from "@mui/material";
 import { PRIMARY } from "colors";
 import { useDisclosure } from "hooks/useDisclosure";
 import { useScreenSize } from "hooks/useScreenSize";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useProvider } from "providers/Provider";
 
 type SidebarItem = {
   type: string;
@@ -93,12 +97,19 @@ const items: SidebarItem[] = [
   },
 ];
 
-export default function Sidebar() {
+interface SidebarProps {
+  closeDrawer: () => void;
+}
+
+export default function Sidebar(props: SidebarProps) {
+  const { closeDrawer } = props;
   const getHref = (type: string) => {
     return type === "all" ? "/" : `/?type=${type}`;
   };
 
-  const { isDesktopSize } = useScreenSize();
+  const { isMobileSize } = useScreenSize();
+
+  const { session } = useProvider();
 
   const searchParams = useSearchParams();
 
@@ -112,13 +123,13 @@ export default function Sidebar() {
     }
   };
 
-  return isDesktopSize ? (
+  return (
     <Box
       sx={{
         zIndex: 100,
         width: 220,
         height: "100vh",
-        backgroundColor: PRIMARY.main,
+        backgroundColor: "#0c254c",
         overflowY: "scroll",
         pt: 2,
         pb: 6,
@@ -126,12 +137,33 @@ export default function Sidebar() {
           display: "none",
         },
       }}
-      position="fixed"
+      position={isMobileSize ? "relative" : "fixed"}
       role="presentation"
     >
+      <Stack
+        px={2}
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+      >
+        <Image
+          priority
+          width={40}
+          height={40}
+          src="/appbar-logo.png"
+          alt="運動火腿"
+        />
+        <Typography color="white">嗨! {session.authUser.name}</Typography>
+      </Stack>
       <List>
         {items.map((item) => (
-          <Link href={getHref(item.type)} key={item.type}>
+          <Link
+            href={getHref(item.type)}
+            key={item.type}
+            onClick={() => {
+              isMobileSize && closeDrawer();
+            }}
+          >
             <ListItem
               sx={{
                 height: 48,
@@ -152,12 +184,17 @@ export default function Sidebar() {
                   },
                 }}
               >
-                <ListItemText primary={item.label} />
+                <Typography
+                  fontWeight={isActive(item.type) ? 600 : "normal"}
+                  fontSize={isActive(item.type) ? "1.2rem" : "1rem"}
+                >
+                  {item.label}
+                </Typography>
               </ListItemButton>
             </ListItem>
           </Link>
         ))}
       </List>
     </Box>
-  ) : null;
+  );
 }
