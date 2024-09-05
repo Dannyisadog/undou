@@ -20,7 +20,7 @@ export const UploadAvatarDialog = (props: UploadAvatarDialogProps) => {
   const { open, onClose } = props;
 
   const { session, updateSession, updateUsers } = useProvider();
-  const { user } = session;
+  const user = session?.user;
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
 
