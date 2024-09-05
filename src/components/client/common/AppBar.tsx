@@ -2,6 +2,7 @@
 
 import {
   Box,
+  IconButton,
   AppBar as MuiAppBar,
   Stack,
   Toolbar,
@@ -11,12 +12,18 @@ import Image from "next/image";
 import TextField from "../TextField";
 import { useScreenSize } from "hooks/useScreenSize";
 import Link from "next/link";
-import Button from "../Button";
+import MenuIcon from "@mui/icons-material/Menu";
 import { useProvider } from "providers/Provider";
 import multiavatar from "@multiavatar/multiavatar/esm";
 
-export default function AppBar() {
-  const { isDesktopSize } = useScreenSize();
+interface AppBarProps {
+  openDrawer: () => void;
+}
+
+export default function AppBar(props: AppBarProps) {
+  const { openDrawer } = props;
+
+  const { isDesktopSize, isMobileSize } = useScreenSize();
 
   const { session } = useProvider();
 
@@ -33,32 +40,44 @@ export default function AppBar() {
         }}
       >
         <Stack direction="row" alignItems="center">
-          <Link href="/signin">
-            <Stack
-              direction="row"
-              alignItems="center"
-              maxWidth={isDesktopSize ? 220 : "auto"}
-            >
-              <Image
-                priority
-                width={40}
-                height={40}
-                src="/appbar-logo.png"
-                alt="運動火腿"
-              />
-              {isDesktopSize && (
-                <Typography
-                  color="primary"
-                  variant="h6"
-                  noWrap
-                  component="a"
-                  ml={2}
-                >
-                  運動火腿
-                </Typography>
-              )}
-            </Stack>
-          </Link>
+          <Stack
+            direction="row"
+            alignItems="center"
+            maxWidth={isDesktopSize ? 220 : "auto"}
+          >
+            {isDesktopSize && (
+              <Link href="/">
+                <Stack direction="row" alignItems="center">
+                  <Image
+                    priority
+                    width={40}
+                    height={40}
+                    src="/appbar-logo.png"
+                    alt="運動火腿"
+                  />
+                  <Typography
+                    color="primary"
+                    variant="h5"
+                    noWrap
+                    component="a"
+                    ml={2}
+                  >
+                    運動火腿
+                  </Typography>
+                </Stack>
+              </Link>
+            )}
+            {isMobileSize && (
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={openDrawer}
+                edge="start"
+              >
+                <MenuIcon />
+              </IconButton>
+            )}
+          </Stack>
           <TextField
             variant="outlined"
             size="small"
