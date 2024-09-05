@@ -20,7 +20,7 @@ export default async function ProfilePage() {
     <Provider session={session}>
       <GeneralLayout>
         <Stack pt={4} width="100%" alignItems="center">
-          <Stack width={400} spacing={2} px={2}>
+          <Stack width={400} spacing={2} px={4}>
             <Title text="基本資訊" hasGoBack={false} />
             <UserAvatar />
             <Stack direction="row" spacing={2}>
