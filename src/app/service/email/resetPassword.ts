@@ -4,7 +4,7 @@ import { generateResetPasswordToken } from "../resetPassword";
 import { get } from "app/repository/user";
 
 export const sendResetPasswordEmail = async (email: string) => {
-  const subject = "Reset your password";
+  const subject = "重設密碼";
 
   const resetPasswordToken = generateResetPasswordToken(email);
 

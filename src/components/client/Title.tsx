@@ -6,11 +6,10 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 interface TitleProps {
   text: string;
   hasGoBack?: boolean;
-  showGithub?: boolean;
 }
 
 export default function Title(props: TitleProps) {
-  const { text, hasGoBack, showGithub = true } = props;
+  const { text, hasGoBack = true } = props;
   return (
     <Stack justifyContent="center">
       <Stack spacing={2}>
@@ -21,11 +20,6 @@ export default function Title(props: TitleProps) {
             </Link>
           ) : (
             <Box />
-          )}
-          {showGithub && (
-            <Link href="https://github.com/Dannyisadog/undou" target="_blank">
-              <GitHubIcon />
-            </Link>
           )}
         </Stack>
         <Typography variant="h4" color="primary">

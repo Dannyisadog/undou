@@ -7,6 +7,7 @@ import Button from "./Button";
 import TextField from "./TextField";
 import { Alert, Stack, Typography } from "@mui/material";
 import Link from "next/link";
+import { useScreenSize } from "hooks/useScreenSize";
 
 export function SigninForm() {
   const [email, setEmail] = useState("");
@@ -16,6 +17,8 @@ export function SigninForm() {
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
+
+  const { isDesktopSize } = useScreenSize();
 
   return (
     <form
@@ -60,7 +63,7 @@ export function SigninForm() {
         setLoading(false);
       }}
     >
-      <Stack spacing={2}>
+      <Stack spacing={2} width="100%" maxWidth={isDesktopSize ? 400 : 375}>
         {error && <Alert severity="error">{error}</Alert>}
         <TextField
           fullWidth

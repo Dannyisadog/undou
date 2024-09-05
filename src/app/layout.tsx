@@ -44,16 +44,7 @@ export default function RootLayout({
       />
       <body>
         <ThemeProvider theme={theme}>
-          <Stack
-            spacing={2}
-            sx={{
-              maxWidth: 400,
-              margin: "auto",
-              px: 2,
-              py: 4,
-            }}
-            justifyContent="center"
-          >
+          <Stack justifyContent="center">
             {children}
             <SpeedInsights />
             <Analytics />

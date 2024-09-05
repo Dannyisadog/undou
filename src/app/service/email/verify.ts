@@ -1,13 +1,12 @@
 import VerifyEmail from "components/email/Verify";
 import { sendEmail } from ".";
 import { generateVerificationToken } from "../verification";
-import { get, update } from "app/repository/user";
 
 export const sendVerificationEmail = async (
   firstName: string,
   email: string
 ) => {
-  const subject = "Verify your email";
+  const subject = "驗證您的電子信箱";
 
   const token = generateVerificationToken(email);
 
