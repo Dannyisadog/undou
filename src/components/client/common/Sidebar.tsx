@@ -122,6 +122,9 @@ export default function Sidebar() {
         overflowY: "scroll",
         pt: 2,
         pb: 6,
+        "::-webkit-scrollbar": {
+          display: "none",
+        },
       }}
       position="fixed"
       role="presentation"
