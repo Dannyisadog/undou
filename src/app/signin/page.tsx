@@ -1,12 +1,9 @@
 import { auth } from "auth";
-import GoogleSigninButton from "components/client/GoogleSigninButton";
-import { SigninForm } from "components/client/SigninForm";
 import { redirect } from "next/navigation";
-import Title from "components/client/Title";
-import FacebookSigninButton from "components/client/FacebookSigninButton";
-import LineSigninButton from "components/client/LineSigninButton";
+import AuthLayout from "layout/AuthLayout";
+import Signin from "components/client/signin";
 
-export default async function Signin() {
+export default async function SigninPage() {
   const session = await auth();
 
   if (session) {
@@ -14,12 +11,8 @@ export default async function Signin() {
   }
 
   return (
-    <>
-      <Title text="運動火腿" />
-      <SigninForm />
-      <GoogleSigninButton />
-      <FacebookSigninButton />
-      <LineSigninButton />
-    </>
+    <AuthLayout>
+      <Signin />
+    </AuthLayout>
   );
 }
