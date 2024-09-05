@@ -142,6 +142,7 @@ export default function AppBar(props: AppBarProps) {
                 variant="outlined"
                 sx={{
                   height: 36,
+                  ml: 1,
                 }}
               >
                 <Typography fontWeight={600}>登入</Typography>
