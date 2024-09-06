@@ -19,7 +19,7 @@ export default function GeneralLayout(props: GeneralLayoutProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Stack pt={6}>
+    <Stack py={6}>
       <AppBar openDrawer={onOpen} />
       {isDesktopSize && <Sidebar closeDrawer={onClose} />}
       <Drawer open={isOpen} onClose={onClose} />
@@ -32,7 +32,7 @@ export default function GeneralLayout(props: GeneralLayoutProps) {
           pt={4}
           width="100%"
           alignItems="center"
-          px={isDesktopSize ? 16 : 2}
+          px={isDesktopSize ? "10vw" : 2}
         >
           {children}
         </Stack>
