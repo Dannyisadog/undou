@@ -143,6 +143,7 @@ export default function AppBar(props: AppBarProps) {
                 sx={{
                   height: 36,
                   ml: 1,
+                  borderRadius: 20,
                 }}
               >
                 <Typography fontWeight={600}>登入</Typography>
