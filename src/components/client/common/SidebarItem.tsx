@@ -21,7 +21,7 @@ export default function SidebarItem(props: SidebarItemProps) {
     <Link href={href} onClick={onClick}>
       <ListItem
         sx={{
-          height: 48,
+          height: 42,
         }}
       >
         <ListItemButton
@@ -38,7 +38,7 @@ export default function SidebarItem(props: SidebarItemProps) {
           {icon}
           <Typography
             fontWeight={active ? 600 : "normal"}
-            fontSize={active ? "1.2rem" : "1rem"}
+            fontSize={active ? "1.1rem" : "0.9rem"}
             ml={icon ? 1 : 0}
           >
             {text}
