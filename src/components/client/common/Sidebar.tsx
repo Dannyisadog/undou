@@ -4,7 +4,7 @@ import { Box, Divider, List, Stack, Typography } from "@mui/material";
 import { DARK_BLUE, PRIMARY } from "colors";
 import { useScreenSize } from "hooks/useScreenSize";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useProvider } from "providers/Provider";
 import SidebarItem from "./SidebarItem";
 import AddBoxIcon from "@mui/icons-material/AddBox";
@@ -109,7 +109,11 @@ export default function Sidebar(props: SidebarProps) {
 
   const queryType = searchParams.get("type");
 
+  const pathname = usePathname();
+
   const isActive = (type: string) => {
+    if (pathname !== "/") return false;
+
     if (!queryType && type === "all") {
       return true;
     } else {
@@ -153,16 +157,19 @@ export default function Sidebar(props: SidebarProps) {
       )}
       <List>
         <SidebarItem
+          active={pathname === "/activity/create"}
           href="/activity/create"
           text="新增活動"
           icon={<AddBoxIcon />}
         />
         <SidebarItem
+          active={pathname === "/activity/joined"}
           href="/activity/joined"
           text="已參加的活動"
           icon={<ChecklistIcon />}
         />
         <SidebarItem
+          active={pathname === "/activity/created"}
           href="/activity/created"
           text="我發起的活動"
           icon={<EmojiPeopleIcon />}
