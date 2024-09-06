@@ -11,18 +11,19 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import ChecklistIcon from "@mui/icons-material/Checklist";
 import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 
-type SidebarItem = {
+export type SidebarItem = {
   type: string;
   label: string;
   description: string;
 };
 
+const allItem: SidebarItem = {
+  type: "all",
+  label: "全部",
+  description: "顯示所有活動",
+};
+
 export const items: SidebarItem[] = [
-  {
-    type: "all",
-    label: "全部",
-    description: "顯示所有運動活動",
-  },
   {
     type: "basketball",
     label: "籃球",
@@ -155,7 +156,11 @@ export default function Sidebar(props: SidebarProps) {
           <Typography color="white">嗨! {session?.authUser.name}</Typography>
         </Stack>
       )}
-      <List>
+      <List
+        sx={{
+          pt: 2,
+        }}
+      >
         <SidebarItem
           active={pathname === "/activity/create"}
           href="/activity/create"
@@ -178,6 +183,14 @@ export default function Sidebar(props: SidebarProps) {
           sx={{
             my: 2,
             backgroundColor: "#ffffff44",
+          }}
+        />
+        <SidebarItem
+          text={allItem.label}
+          active={isActive(allItem.type)}
+          href={getHref(allItem.type)}
+          onClick={() => {
+            isMobileSize && closeDrawer();
           }}
         />
         {items.map((item) => (

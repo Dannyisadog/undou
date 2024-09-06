@@ -9,7 +9,15 @@ import Link from "next/link";
 export default function AuthAppBar() {
   const { isDesktopSize } = useScreenSize();
   return (
-    <AppBar position="fixed" elevation={4}>
+    <AppBar
+      position="fixed"
+      elevation={4}
+      sx={{
+        "&.MuiPaper-root": {
+          boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+        },
+      }}
+    >
       <Toolbar
         sx={{
           backgroundColor: "white",

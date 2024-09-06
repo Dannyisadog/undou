@@ -1,0 +1,16 @@
+model Activity {
+  id              Int      @id @default(autoincrement())
+  name            String
+  description     String
+  image           String?
+  date            DateTime
+  location        String
+  address         String?
+  creatorId       Int
+  maxParticipants Int
+  type            String
+  is_active       Boolean  @default(false)
+  is_deleted      Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
