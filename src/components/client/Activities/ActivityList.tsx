@@ -30,6 +30,7 @@ export default function ActivityList() {
   }, [type]);
 
   useEffect(() => {
+    setActivities([]);
     fetchActivities();
   }, [type, fetchActivities]);
 
