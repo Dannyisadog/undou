@@ -5,6 +5,8 @@ import { theme } from "theme";
 import { Stack } from "@mui/material";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
+import { GlobalStoreProvider } from "providers/StoreProvider";
+import { auth, CustomSession } from "auth";
 
 export const metadata: Metadata = {
   title: "運動火腿",
@@ -30,11 +32,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = (await auth()) as CustomSession;
+
   return (
     <html lang="en">
       <meta charSet="utf-8" />
@@ -43,13 +47,15 @@ export default function RootLayout({
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
       />
       <body>
-        <ThemeProvider theme={theme}>
-          <Stack justifyContent="center">
-            {children}
-            <SpeedInsights />
-            <Analytics />
-          </Stack>
-        </ThemeProvider>
+        <GlobalStoreProvider session={session}>
+          <ThemeProvider theme={theme}>
+            <Stack justifyContent="center">
+              {children}
+              <SpeedInsights />
+              <Analytics />
+            </Stack>
+          </ThemeProvider>
+        </GlobalStoreProvider>
       </body>
     </html>
   );
