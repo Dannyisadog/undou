@@ -8,6 +8,8 @@ import { Activity } from "@prisma/client";
 import { Card, Stack, Typography } from "@mui/material";
 import { DARK_BLUE } from "colors";
 import Link from "next/link";
+import ActivityCard from "./ActivityCard";
+import ActivityListSkeleton from "./ActivityListSkeleton";
 
 export default function ActivityList() {
   const searchParams = useSearchParams();
@@ -17,11 +19,14 @@ export default function ActivityList() {
   const item = getActivityItemByType(type);
 
   const [activities, setActivities] = useState<Activity[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchActivities = useCallback(async () => {
+    setLoading(true);
     const response = await fetch(`/api/activities?type=${type}`);
     const data = await response.json();
     setActivities(data);
+    setLoading(false);
   }, [type]);
 
   useEffect(() => {
@@ -31,28 +36,14 @@ export default function ActivityList() {
   return (
     <Stack width="100%" spacing={4}>
       <Title hasGoBack={false} text={item ? `${item.label}活動` : "全部活動"} />
-      {activities.length === 0 && <Typography>目前沒有任何活動</Typography>}
+      {loading && <ActivityListSkeleton />}
+      {activities.length === 0 && !loading && (
+        <Typography>目前沒有任何活動</Typography>
+      )}
       <Stack spacing={2}>
         {activities.map((activity) => (
           <Link href={`/activity/${activity.id}`} key={activity.id}>
-            <Card
-              sx={{
-                boxShadow: "0px 4px 4px #33333333",
-                backgroundColor: "white",
-                borderRadius: 3,
-                color: DARK_BLUE,
-                padding: 2,
-              }}
-            >
-              <Stack spacing={0.5}>
-                <Typography variant="h5">{activity.name}</Typography>
-                <p>{activity.description}</p>
-                <p>{activity.location}</p>
-                <p>{activity.date.toString()}</p>
-                <p>{activity.maxParticipants}</p>
-                <p>{activity.type}</p>
-              </Stack>
-            </Card>
+            <ActivityCard activity={activity} />
           </Link>
         ))}
       </Stack>
