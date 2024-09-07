@@ -6,10 +6,10 @@ import {
   Input,
 } from "@mui/material";
 import Button from "./Button";
-import { useProvider } from "providers/Provider";
 import Image from "next/image";
 import multiavatar from "@multiavatar/multiavatar/esm";
 import { useRef, useState } from "react";
+import { useGlobalStore } from "providers/StoreProvider";
 
 interface UploadAvatarDialogProps {
   open: boolean;
@@ -19,7 +19,7 @@ interface UploadAvatarDialogProps {
 export const UploadAvatarDialog = (props: UploadAvatarDialogProps) => {
   const { open, onClose } = props;
 
-  const { session, updateSession, updateUsers } = useProvider();
+  const { session } = useGlobalStore((state) => state);
   const user = session?.user;
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -76,8 +76,6 @@ export const UploadAvatarDialog = (props: UploadAvatarDialogProps) => {
     });
     setSaving(false);
     close();
-    updateSession();
-    updateUsers();
   };
 
   return (
