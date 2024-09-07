@@ -13,9 +13,9 @@ import TextField from "../TextField";
 import { useScreenSize } from "hooks/useScreenSize";
 import Link from "next/link";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useProvider } from "providers/Provider";
 import multiavatar from "@multiavatar/multiavatar/esm";
 import Button from "../Button";
+import { useGlobalStore } from "providers/StoreProvider";
 
 interface AppBarProps {
   openDrawer: () => void;
@@ -26,7 +26,7 @@ export default function AppBar(props: AppBarProps) {
 
   const { isDesktopSize, isMobileSize } = useScreenSize();
 
-  const { session } = useProvider();
+  const { session } = useGlobalStore((state) => state);
 
   const authUser = session?.authUser;
 
@@ -99,7 +99,7 @@ export default function AppBar(props: AppBarProps) {
           />
         </Stack>
         <Stack>
-          {session ? (
+          {authUser ? (
             <Link href="/profile">
               <Box
                 sx={{

@@ -7,10 +7,10 @@ import Image from "next/image";
 import EditIcon from "@mui/icons-material/Edit";
 import { useDisclosure } from "hooks/useDisclosure";
 import { UploadAvatarDialog } from "./UploadAvatarDialog";
-import { useProvider } from "providers/Provider";
+import { useGlobalStore } from "providers/StoreProvider";
 
 const UserAvatar = () => {
-  const { session } = useProvider();
+  const { session } = useGlobalStore((state) => state);
 
   const authUser = session?.authUser;
 

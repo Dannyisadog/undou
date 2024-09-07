@@ -5,11 +5,11 @@ import { DARK_BLUE, PRIMARY } from "colors";
 import { useScreenSize } from "hooks/useScreenSize";
 import Image from "next/image";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useProvider } from "providers/Provider";
 import SidebarItem from "./SidebarItem";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import ChecklistIcon from "@mui/icons-material/Checklist";
 import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
+import { useGlobalStore } from "providers/StoreProvider";
 
 export type SidebarItem = {
   type: string;
@@ -102,9 +102,11 @@ export default function Sidebar(props: SidebarProps) {
     return type === "all" ? "/" : `/?type=${type}`;
   };
 
-  const { isMobileSize } = useScreenSize();
+  const { session } = useGlobalStore((state) => state);
 
-  const { session } = useProvider();
+  const authUser = session?.authUser;
+
+  const { isMobileSize } = useScreenSize();
 
   const searchParams = useSearchParams();
 
@@ -153,7 +155,7 @@ export default function Sidebar(props: SidebarProps) {
             src="/appbar-logo.png"
             alt="運動火腿"
           />
-          <Typography color="white">嗨! {session?.authUser.name}</Typography>
+          <Typography color="white">嗨! {authUser?.name}</Typography>
         </Stack>
       )}
       <List
@@ -161,30 +163,34 @@ export default function Sidebar(props: SidebarProps) {
           pt: 2,
         }}
       >
-        <SidebarItem
-          active={pathname === "/activity/create"}
-          href="/activity/create"
-          text="新增活動"
-          icon={<AddBoxIcon />}
-        />
-        <SidebarItem
-          active={pathname === "/activity/joined"}
-          href="/activity/joined"
-          text="已參加的活動"
-          icon={<ChecklistIcon />}
-        />
-        <SidebarItem
-          active={pathname === "/activity/created"}
-          href="/activity/created"
-          text="我發起的活動"
-          icon={<EmojiPeopleIcon />}
-        />
-        <Divider
-          sx={{
-            my: 2,
-            backgroundColor: "#ffffff44",
-          }}
-        />
+        {authUser && (
+          <>
+            <SidebarItem
+              active={pathname === "/activity/create"}
+              href="/activity/create"
+              text="新增活動"
+              icon={<AddBoxIcon />}
+            />
+            <SidebarItem
+              active={pathname === "/activity/joined"}
+              href="/activity/joined"
+              text="已參加的活動"
+              icon={<ChecklistIcon />}
+            />
+            <SidebarItem
+              active={pathname === "/activity/created"}
+              href="/activity/created"
+              text="我發起的活動"
+              icon={<EmojiPeopleIcon />}
+            />
+            <Divider
+              sx={{
+                my: 2,
+                backgroundColor: "#ffffff44",
+              }}
+            />
+          </>
+        )}
         <SidebarItem
           text={allItem.label}
           active={isActive(allItem.type)}
