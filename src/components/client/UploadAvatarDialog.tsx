@@ -110,14 +110,24 @@ export const UploadAvatarDialog = (props: UploadAvatarDialogProps) => {
             )}
           </DialogContent>
           <DialogActions>
-            <Button onClick={close}>Cancel</Button>
+            <Button
+              sx={{
+                height: 40,
+              }}
+              onClick={close}
+            >
+              取消
+            </Button>
             <Button
               variant="contained"
               component="label"
               autoFocus
               isLoading={uploading}
+              sx={{
+                color: "white",
+              }}
             >
-              Upload
+              上傳
               <input ref={imageRef} type="file" hidden onChange={upload} />
             </Button>
           </DialogActions>
@@ -138,22 +148,36 @@ export const UploadAvatarDialog = (props: UploadAvatarDialogProps) => {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={close}>Cancel</Button>
+            <Button
+              sx={{
+                height: 40,
+              }}
+              onClick={close}
+            >
+              取消
+            </Button>
             <Button
               variant="outlined"
               component="label"
               autoFocus
               isLoading={uploading}
+              sx={{
+                height: 40,
+              }}
             >
-              Reselect
+              重新選擇
               <input ref={imageRef} type="file" hidden onChange={upload} />
             </Button>
             <Button
               variant="contained"
               onClick={updateUserAvatar}
               isLoading={saving}
+              sx={{
+                height: 40,
+                color: "white",
+              }}
             >
-              Save
+              儲存
             </Button>
           </DialogActions>
         </>
