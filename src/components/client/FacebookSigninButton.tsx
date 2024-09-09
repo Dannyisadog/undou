@@ -18,6 +18,10 @@ export default function FacebookSigninButton() {
         setLoading(true);
         await signIn("facebook");
       }}
+      sx={{
+        maxWidth: 400,
+        height: 48,
+      }}
     >
       <Stack direction="row" spacing={1}>
         <Image
