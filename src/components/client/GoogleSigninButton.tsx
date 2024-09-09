@@ -18,6 +18,10 @@ export default function GoogleSigninButton() {
         setLoading(true);
         await signIn("google");
       }}
+      sx={{
+        maxWidth: 400,
+        height: 48,
+      }}
     >
       <Stack direction="row" spacing={1}>
         <Image

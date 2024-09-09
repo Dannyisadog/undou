@@ -18,6 +18,10 @@ export default function LineSigninButton() {
         setLoading(true);
         await signIn("line");
       }}
+      sx={{
+        maxWidth: 400,
+        height: 48,
+      }}
     >
       <Stack direction="row" spacing={1}>
         <Image src="/ic-line.png" alt="Line" width={24} height={24} priority />
