@@ -1,15 +1,11 @@
-import {
-  Box,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  Input,
-} from "@mui/material";
+import { Box, Dialog, DialogActions, DialogContent } from "@mui/material";
 import Button from "./Button";
 import Image from "next/image";
 import multiavatar from "@multiavatar/multiavatar/esm";
 import { useRef, useState } from "react";
 import { useGlobalStore } from "providers/StoreProvider";
+import { CustomSession } from "auth";
+import { getSession } from "next-auth/react";
 
 interface UploadAvatarDialogProps {
   open: boolean;
@@ -19,8 +15,8 @@ interface UploadAvatarDialogProps {
 export const UploadAvatarDialog = (props: UploadAvatarDialogProps) => {
   const { open, onClose } = props;
 
-  const { session } = useGlobalStore((state) => state);
-  const user = session?.user;
+  const { session, updateSession } = useGlobalStore((state) => state);
+  const user = session?.authUser;
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
 
@@ -75,6 +71,8 @@ export const UploadAvatarDialog = (props: UploadAvatarDialogProps) => {
       }),
     });
     setSaving(false);
+    const newSession = await getSession();
+    updateSession(newSession as CustomSession);
     close();
   };
 
@@ -112,14 +110,24 @@ export const UploadAvatarDialog = (props: UploadAvatarDialogProps) => {
             )}
           </DialogContent>
           <DialogActions>
-            <Button onClick={close}>Cancel</Button>
+            <Button
+              sx={{
+                height: 40,
+              }}
+              onClick={close}
+            >
+              取消
+            </Button>
             <Button
               variant="contained"
               component="label"
               autoFocus
               isLoading={uploading}
+              sx={{
+                color: "white",
+              }}
             >
-              Upload
+              上傳
               <input ref={imageRef} type="file" hidden onChange={upload} />
             </Button>
           </DialogActions>
@@ -140,22 +148,36 @@ export const UploadAvatarDialog = (props: UploadAvatarDialogProps) => {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={close}>Cancel</Button>
+            <Button
+              sx={{
+                height: 40,
+              }}
+              onClick={close}
+            >
+              取消
+            </Button>
             <Button
               variant="outlined"
               component="label"
               autoFocus
               isLoading={uploading}
+              sx={{
+                height: 40,
+              }}
             >
-              Reselect
+              重新選擇
               <input ref={imageRef} type="file" hidden onChange={upload} />
             </Button>
             <Button
               variant="contained"
               onClick={updateUserAvatar}
               isLoading={saving}
+              sx={{
+                height: 40,
+                color: "white",
+              }}
             >
-              Save
+              儲存
             </Button>
           </DialogActions>
         </>
