@@ -5,9 +5,11 @@ import Button from "./Button";
 import { Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import Image from "next/image";
+import { useScreenSize } from "hooks/useScreenSize";
 
 export default function FacebookSigninButton() {
   const [loading, setLoading] = useState(false);
+  const { isDesktopSize } = useScreenSize();
 
   return (
     <Button
@@ -19,7 +21,7 @@ export default function FacebookSigninButton() {
         await signIn("facebook");
       }}
       sx={{
-        maxWidth: 400,
+        maxWidth: isDesktopSize ? 400 : 375,
         height: 48,
       }}
     >

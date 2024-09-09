@@ -31,8 +31,12 @@ export default function GeneralLayout(props: GeneralLayoutProps) {
         <Stack
           pt={4}
           width="100%"
+          maxWidth="1080px"
           alignItems="center"
-          px={isDesktopSize ? "10vw" : 2}
+          px={isDesktopSize ? 3 : 2}
+          sx={{
+            margin: "0 auto",
+          }}
         >
           {children}
         </Stack>
