@@ -11,6 +11,7 @@ export default function CreatedActivityPage() {
   return (
     <GeneralLayout>
       <Title text="我發起的活動" hasGoBack={false} />
+      <CreatedActivity />
     </GeneralLayout>
   );
 }
