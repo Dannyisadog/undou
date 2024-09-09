@@ -27,7 +27,7 @@ export default function AuthAppBar() {
           direction="row"
           alignItems="center"
           justifyContent="space-between"
-          spacing={4}
+          spacing={isDesktopSize ? 4 : 2}
         >
           <Link href="/">
             <Stack direction="row" alignItems="center">
@@ -38,35 +38,34 @@ export default function AuthAppBar() {
                 src="/appbar-logo.png"
                 alt="運動火腿"
               />
-              <Typography
-                color="primary"
-                variant="h5"
-                noWrap
-                component="a"
-                ml={2}
-              >
+              <Typography color="primary" variant="h5" noWrap ml={2}>
                 運動火腿
               </Typography>
             </Stack>
           </Link>
+          <Link href="/">
+            <Typography fontWeight={600} color={DARK_BLUE}>
+              所有活動
+            </Typography>
+          </Link>
           {isDesktopSize && (
             <>
-              <Link href="/">
+              <Link href="/signin">
                 <Typography fontWeight={600} color={DARK_BLUE}>
-                  所有活動
+                  登入
                 </Typography>
               </Link>
-              <Link href="/">
+              <Link href="/about">
                 <Typography fontWeight={600} color={DARK_BLUE}>
                   關於平台
                 </Typography>
               </Link>
-              <Link href="/">
+              <Link href="/privacy">
                 <Typography fontWeight={600} color={DARK_BLUE}>
                   隱私權政策
                 </Typography>
               </Link>
-              <Link href="/">
+              <Link href="/terms">
                 <Typography fontWeight={600} color={DARK_BLUE}>
                   服務條款
                 </Typography>
