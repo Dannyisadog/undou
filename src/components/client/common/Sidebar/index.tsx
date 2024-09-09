@@ -16,6 +16,8 @@ import BasketballIcon from "./ic-basketball.png";
 import BasketballActiveIcon from "./ic-basketball-active.png";
 import BadminIcon from "./ic-badminton.png";
 import BadminActiveIcon from "./ic-badminton-active.png";
+import TennisIcon from "./ic-tennis.png";
+import TennisActiveIcon from "./ic-tennis-active.png";
 import RunningIcon from "./ic-running.png";
 import RunningActiveIcon from "./ic-running-active.png";
 import ClimbIcon from "./ic-climb.png";
@@ -69,6 +71,14 @@ export const items: SidebarItem[] = [
       "容易組織的雙人或多人運動，場地需求不高，適合在社區活動中心或學校內進行。",
     icon: BadminIcon,
     activeIcon: BadminActiveIcon,
+  },
+  {
+    // 網球
+    type: "tennis",
+    label: "網球",
+    description: "網球是一種運動，通常在網球場上進行。",
+    icon: TennisIcon,
+    activeIcon: TennisActiveIcon,
   },
   {
     type: "running",
