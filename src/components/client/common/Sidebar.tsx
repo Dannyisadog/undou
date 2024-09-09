@@ -155,7 +155,9 @@ export default function Sidebar(props: SidebarProps) {
             src="/appbar-logo.png"
             alt="運動火腿"
           />
-          <Typography color="white">嗨! {authUser?.name}</Typography>
+          {authUser && (
+            <Typography color="white">嗨! {authUser?.name}</Typography>
+          )}
         </Stack>
       )}
       <List
