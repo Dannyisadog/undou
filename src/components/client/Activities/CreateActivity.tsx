@@ -10,8 +10,9 @@ import Button from "../Button";
 import { PRIMARY } from "colors";
 import { useFormik } from "formik";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { activitySchema } from "validation/activity";
+import { useGlobalStore } from "providers/StoreProvider";
 
 export type ActivityType = {
   name: string;
@@ -57,6 +58,12 @@ export default function CreateActivity() {
   });
 
   const { isMobileSize } = useScreenSize();
+
+  const { session } = useGlobalStore((state) => state);
+
+  if (!session) {
+    redirect("/signin");
+  }
 
   const direction = isMobileSize ? "column" : "row";
 
