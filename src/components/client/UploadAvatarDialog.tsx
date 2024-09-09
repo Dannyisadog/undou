@@ -1,15 +1,11 @@
-import {
-  Box,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  Input,
-} from "@mui/material";
+import { Box, Dialog, DialogActions, DialogContent } from "@mui/material";
 import Button from "./Button";
 import Image from "next/image";
 import multiavatar from "@multiavatar/multiavatar/esm";
 import { useRef, useState } from "react";
 import { useGlobalStore } from "providers/StoreProvider";
+import { CustomSession } from "auth";
+import { getSession } from "next-auth/react";
 
 interface UploadAvatarDialogProps {
   open: boolean;
@@ -19,8 +15,8 @@ interface UploadAvatarDialogProps {
 export const UploadAvatarDialog = (props: UploadAvatarDialogProps) => {
   const { open, onClose } = props;
 
-  const { session } = useGlobalStore((state) => state);
-  const user = session?.user;
+  const { session, updateSession } = useGlobalStore((state) => state);
+  const user = session?.authUser;
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
 
@@ -75,6 +71,8 @@ export const UploadAvatarDialog = (props: UploadAvatarDialogProps) => {
       }),
     });
     setSaving(false);
+    const newSession = await getSession();
+    updateSession(newSession as CustomSession);
     close();
   };
 
