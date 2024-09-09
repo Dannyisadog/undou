@@ -1,6 +1,6 @@
 "use client";
 
-import { signIn } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Button from "./Button";
@@ -8,6 +8,8 @@ import TextField from "./TextField";
 import { Alert, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { useScreenSize } from "hooks/useScreenSize";
+import { useGlobalStore } from "providers/StoreProvider";
+import { CustomSession } from "auth";
 
 export function SigninForm() {
   const [email, setEmail] = useState("");
@@ -15,6 +17,8 @@ export function SigninForm() {
   const [error, setError] = useState("");
 
   const router = useRouter();
+
+  const { updateSession } = useGlobalStore((state) => state);
 
   const [loading, setLoading] = useState(false);
 
@@ -57,6 +61,8 @@ export function SigninForm() {
         }
 
         if (!result?.error) {
+          const newSession = (await getSession()) as CustomSession;
+          updateSession(newSession);
           router.push("/");
         }
 
