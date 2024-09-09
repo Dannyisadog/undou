@@ -11,6 +11,7 @@ export default function JoinedActivityPage() {
   return (
     <GeneralLayout>
       <Title text="已參加的活動" hasGoBack={false} />
+      <JoinedActivity />
     </GeneralLayout>
   );
 }
