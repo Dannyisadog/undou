@@ -39,6 +39,24 @@ export const list = async (params: ListParams): Promise<Activity[]> => {
   return activities;
 };
 
+export const listJoined = async () => {
+  const user = await getAuthUser();
+
+  const participants = await prisma.participant.findMany({
+    where: {
+      userId: user.id,
+      is_deleted: false,
+    },
+    include: {
+      activity: true,
+    },
+  });
+
+  const activities = participants.map((participant) => participant.activity);
+
+  return activities;
+};
+
 export const get = async (id: string) => {
   const activity = await prisma.activity.findUnique({
     where: {
