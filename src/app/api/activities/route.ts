@@ -5,7 +5,9 @@ import { NextRequest, NextResponse } from "next/server";
 export const GET = async (req: NextRequest) => {
   const type = req.nextUrl.searchParams.get("type") || "all";
 
-  const activities = await list({ type });
+  const owned = req.nextUrl.searchParams.get("owned") === "true";
+
+  const activities = await list({ type, owned });
 
   return NextResponse.json(activities);
 };
