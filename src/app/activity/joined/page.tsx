@@ -1,3 +1,4 @@
+import { listJoined } from "app/repository/activity";
 import JoinedActivity from "components/client/Activities/JoinedActivity";
 import Title from "components/client/Title";
 import GeneralLayout from "layout/GeneralLayout";
@@ -7,11 +8,11 @@ export const metadata: Metadata = {
   title: "運動火腿 - 已參加的活動",
 };
 
-export default function JoinedActivityPage() {
+export default async function JoinedActivityPage() {
+  const activities = await listJoined();
   return (
     <GeneralLayout>
-      <Title text="已參加的活動" hasGoBack={false} />
-      <JoinedActivity />
+      <JoinedActivity activities={activities} />
     </GeneralLayout>
   );
 }
