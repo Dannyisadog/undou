@@ -1,6 +1,6 @@
 "use client";
 
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { useScreenSize } from "hooks/useScreenSize";
 import TextField from "../TextField";
 import DatePicker from "../DatePicker";
@@ -17,8 +17,10 @@ import { useGlobalStore } from "providers/StoreProvider";
 export type ActivityType = {
   name: string;
   type?: string;
-  date?: Date;
+  startDate?: Date;
+  endDate?: Date;
   maxParticipants: number;
+  fee: number;
   location: string;
   address: string;
   description: string;
@@ -31,8 +33,10 @@ export default function CreateActivity() {
     initialValues: {
       name: "一起來運動！",
       type: undefined,
-      date: undefined,
+      startDate: undefined,
+      endDate: undefined,
       maxParticipants: 0,
+      fee: 0,
       location: "",
       address: "",
       description: "",
@@ -45,8 +49,10 @@ export default function CreateActivity() {
         body: JSON.stringify({
           name: values.name,
           type: values.type,
-          date: values.date?.toISOString(),
+          startDate: values.startDate?.toISOString(),
+          endDate: values.endDate?.toISOString(),
           maxParticipants: values.maxParticipants,
+          fee: values.fee,
           location: values.location,
           address: values.address,
           description: values.description,
@@ -80,6 +86,7 @@ export default function CreateActivity() {
         />
         <Select
           fullWidth
+          placeholder="請選擇活動類型"
           label="活動類型"
           items={items}
           renderLabel={(value) => value.label}
@@ -96,15 +103,32 @@ export default function CreateActivity() {
           fullWidth
           label="活動開始時間"
           onChange={(e) => {
-            formik.setFieldValue("date", e);
+            formik.setFieldValue("startDate", e);
           }}
         />
+        <DatePicker
+          fullWidth
+          label="活動結束時間"
+          onChange={(e) => {
+            formik.setFieldValue("endDate", e);
+          }}
+        />
+      </Stack>
+      <Stack direction={direction} spacing={2} width="100%">
         <TextField
           fullWidth
           type="number"
           label="可報名人數"
           onChange={(e) => {
             formik.setFieldValue("maxParticipants", parseInt(e.target.value));
+          }}
+        />
+        <TextField
+          fullWidth
+          type="number"
+          label="費用"
+          onChange={(e) => {
+            formik.setFieldValue("fee", parseInt(e.target.value));
           }}
         />
       </Stack>
@@ -137,18 +161,16 @@ export default function CreateActivity() {
       </Stack>
       <Button
         isLoading={loading}
-        variant="outlined"
+        variant="contained"
         sx={{
-          ":hover": {
-            backgroundColor: PRIMARY.main,
-            color: "white",
-          },
+          height: 48,
+          color: "white",
         }}
         onClick={() => {
           formik.handleSubmit();
         }}
       >
-        新增活動
+        <Typography variant="subtitle1">新增活動</Typography>
       </Button>
     </Stack>
   );

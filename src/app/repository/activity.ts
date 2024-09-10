@@ -52,8 +52,17 @@ export const create = async (params: any): Promise<Activity> => {
 
   await activitySchema.validate(params, { abortEarly: false });
 
-  const { name, description, image, date, location, maxParticipants, type } =
-    params;
+  const {
+    name,
+    description,
+    image,
+    startDate,
+    endDate,
+    location,
+    maxParticipants,
+    fee,
+    type,
+  } = params;
 
   const activity = await prisma.activity.create({
     data: {
@@ -61,9 +70,11 @@ export const create = async (params: any): Promise<Activity> => {
       name,
       description,
       image,
-      date,
+      startDate,
+      endDate,
       location,
       maxParticipants,
+      fee,
       type,
     },
   });

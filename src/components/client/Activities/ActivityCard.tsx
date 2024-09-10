@@ -25,8 +25,10 @@ export default function ActivityCard(props: ActivityCardProps) {
         <Typography variant="h5">{activity.name}</Typography>
         <p>{activity.description}</p>
         <p>{activity.location}</p>
-        <p>{activity.date.toString()}</p>
+        <p>{activity.startDate.toString()}</p>
+        <p>{activity.endDate.toString()}</p>
         <p>{activity.maxParticipants}</p>
+        <p>{activity.fee}</p>
         <p>{activity.type}</p>
       </Stack>
     </Card>

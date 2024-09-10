@@ -3,7 +3,9 @@ model Activity {
   name            String
   description     String
   image           String?
-  date            DateTime
+  startDate       DateTime
+  endDate         DateTime @default(now())
+  fee             Int      @default(0)
   location        String
   address         String?
   creatorId       Int
