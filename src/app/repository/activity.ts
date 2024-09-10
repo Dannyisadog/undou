@@ -1,6 +1,10 @@
 import { Activity, PrismaClient } from "@prisma/client";
 import { getAuthUser } from "util/auth";
 import { activitySchema } from "validation/activity";
+import {
+  get as getParticipant,
+  create as createParticipant,
+} from "./participant";
 
 const prisma = new PrismaClient();
 
@@ -82,4 +86,46 @@ export const create = async (params: any): Promise<Activity> => {
   });
 
   return activity;
+};
+
+export const join = async (id: number) => {
+  const user = await getAuthUser();
+
+  const participant = await getParticipant({
+    userId: user.id,
+    activityId: id,
+  });
+
+  if (participant) {
+    throw new Error("Already joined");
+  }
+
+  const newParticipant = await createParticipant({
+    userId: user.id,
+    activityId: id,
+  });
+
+  return newParticipant;
+};
+
+export const disjoin = async (id: number) => {
+  const user = await getAuthUser();
+
+  const participant = await getParticipant({
+    userId: user.id,
+    activityId: id,
+  });
+
+  if (!participant) {
+    throw new Error("Not joined");
+  }
+
+  await prisma.participant.update({
+    where: {
+      id: participant.id,
+    },
+    data: {
+      is_deleted: true,
+    },
+  });
 };
