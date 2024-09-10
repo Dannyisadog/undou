@@ -39,6 +39,7 @@ export default function AppBar(props: AppBarProps) {
       sx={{
         "&.MuiPaper-root": {
           boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+          pr: "0 !important",
         },
       }}
     >
@@ -48,7 +49,7 @@ export default function AppBar(props: AppBarProps) {
           justifyContent: "space-between",
         }}
       >
-        <Stack direction="row" alignItems="center">
+        <Stack direction="row" alignItems="center" spacing={2}>
           <Stack
             direction="row"
             alignItems="center"

@@ -13,6 +13,7 @@ import { useState } from "react";
 import { redirect, useRouter } from "next/navigation";
 import { activitySchema } from "validation/activity";
 import { useGlobalStore } from "providers/StoreProvider";
+import dayjs from "dayjs";
 
 export type ActivityType = {
   name: string;
@@ -41,8 +42,9 @@ export default function CreateActivity() {
       address: "",
       description: "",
     },
+    validateOnChange: true,
+    validationSchema: activitySchema,
     onSubmit: async (values) => {
-      await activitySchema.validate(values, { abortEarly: false });
       setLoading(true);
       await fetch("/api/activities", {
         method: "POST",
@@ -79,6 +81,9 @@ export default function CreateActivity() {
         <TextField
           fullWidth
           label="活動名稱"
+          error={!!formik.errors.name}
+          helperText={formik.errors.name}
+          placeholder="請輸入活動名稱"
           value={formik.values.name}
           onChange={(e) => {
             formik.setFieldValue("name", e.target.value);
@@ -88,6 +93,8 @@ export default function CreateActivity() {
           fullWidth
           placeholder="請選擇活動類型"
           label="活動類型"
+          error={!!formik.errors.type}
+          helperText={formik.errors.type}
           items={items}
           renderLabel={(value) => value.label}
           onChange={(value) =>
@@ -102,6 +109,8 @@ export default function CreateActivity() {
         <DatePicker
           fullWidth
           label="活動開始時間"
+          error={!!formik.errors.startDate}
+          helperText={formik.errors.startDate}
           onChange={(e) => {
             formik.setFieldValue("startDate", e);
           }}
@@ -109,6 +118,9 @@ export default function CreateActivity() {
         <DatePicker
           fullWidth
           label="活動結束時間"
+          error={!!formik.errors.endDate}
+          helperText={formik.errors.endDate}
+          minDate={dayjs(formik.values.startDate)}
           onChange={(e) => {
             formik.setFieldValue("endDate", e);
           }}
@@ -117,6 +129,9 @@ export default function CreateActivity() {
       <Stack direction={direction} spacing={2} width="100%">
         <TextField
           fullWidth
+          placeholder="請輸入可報名人數"
+          error={!!formik.errors.maxParticipants}
+          helperText={formik.errors.maxParticipants}
           type="number"
           label="可報名人數"
           onChange={(e) => {
@@ -125,7 +140,11 @@ export default function CreateActivity() {
         />
         <TextField
           fullWidth
+          placeholder="請輸入費用"
           type="number"
+          value={formik.values.fee}
+          error={!!formik.errors.fee}
+          helperText={formik.errors.fee}
           label="費用"
           onChange={(e) => {
             formik.setFieldValue("fee", parseInt(e.target.value));
@@ -135,14 +154,20 @@ export default function CreateActivity() {
       <Stack direction={direction} spacing={2} width="100%">
         <TextField
           fullWidth
+          placeholder="請輸入活動地點"
           label="活動地點"
+          error={!!formik.errors.location}
+          helperText={formik.errors.location}
           onChange={(e) => {
             formik.setFieldValue("location", e.target.value);
           }}
         />
         <TextField
           fullWidth
+          placeholder="請輸入活動地址"
           label="活動地址"
+          error={!!formik.errors.address}
+          helperText={formik.errors.address}
           onChange={(e) => {
             formik.setFieldValue("address", e.target.value);
           }}
@@ -153,6 +178,8 @@ export default function CreateActivity() {
           fullWidth
           label="活動敘述"
           rows={6}
+          error={!!formik.errors.description}
+          helperText={formik.errors.description}
           multiline
           onChange={(e) => {
             formik.setFieldValue("description", e.target.value);
