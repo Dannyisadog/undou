@@ -1,4 +1,5 @@
-import { create, list } from "app/repository/activity";
+import { Activity } from "@prisma/client";
+import { create, list, listJoined } from "app/repository/activity";
 import { auth } from "auth";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -7,7 +8,15 @@ export const GET = async (req: NextRequest) => {
 
   const owned = req.nextUrl.searchParams.get("owned") === "true";
 
-  const activities = await list({ type, owned });
+  const joined = req.nextUrl.searchParams.get("joined") === "true";
+
+  let activities: Activity[] = [];
+
+  if (joined) {
+    activities = await listJoined();
+  } else {
+    activities = await list({ type, owned, joined });
+  }
 
   return NextResponse.json(activities);
 };
