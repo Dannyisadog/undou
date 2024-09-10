@@ -20,9 +20,11 @@ export default async function ActivityPage({
     <GeneralLayout>
       <Title text={activity.name} />
       <Typography>{activity.description}</Typography>
-      <Typography>{activity.date.toString()}</Typography>
+      <Typography>{activity.startDate.toString()}</Typography>
+      <Typography>{activity.endDate.toString()}</Typography>
       <Typography>{activity.location}</Typography>
       <Typography>{activity.maxParticipants}</Typography>
+      <Typography>{activity.fee}</Typography>
       <Typography>{activity.type}</Typography>
     </GeneralLayout>
   );
