@@ -6,29 +6,31 @@ const prisma = new PrismaClient();
 
 interface ListParams {
   type: string;
+  owned?: boolean;
 }
 
 export const list = async (params: ListParams): Promise<Activity[]> => {
-  const { type } = params;
+  const { type, owned } = params;
 
   let activities: Activity[] = [];
 
-  if (type === "all") {
-    activities = await prisma.activity.findMany({
-      orderBy: {
-        updatedAt: "desc",
-      },
-    });
-  } else {
-    activities = await prisma.activity.findMany({
-      where: {
-        type,
-      },
-      orderBy: {
-        updatedAt: "desc",
-      },
-    });
+  const conditions = {} as any;
+
+  if (type !== "all") {
+    conditions["type"] = type;
   }
+
+  if (owned) {
+    const user = await getAuthUser();
+    conditions["creatorId"] = user.id;
+  }
+
+  activities = await prisma.activity.findMany({
+    where: conditions,
+    orderBy: {
+      updatedAt: "desc",
+    },
+  });
 
   return activities;
 };
