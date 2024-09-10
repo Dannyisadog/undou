@@ -15,7 +15,7 @@ export const GET = async (req: NextRequest) => {
   if (joined) {
     activities = await listJoined();
   } else {
-    activities = await list({ type, owned, joined });
+    activities = await list({ type, owned });
   }
 
   return NextResponse.json(activities);
