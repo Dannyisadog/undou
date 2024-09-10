@@ -1,7 +1,10 @@
 import { Typography } from "@mui/material";
 import { Activity } from "@prisma/client";
+import { get } from "app/repository/activity";
+import ActivityInfo from "components/client/Activities/ActivityInfo";
 import Title from "components/client/Title";
 import GeneralLayout from "layout/GeneralLayout";
+import { getAuthUser } from "util/auth";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -12,20 +15,12 @@ export default async function ActivityPage({
 }) {
   const { id } = params;
 
-  const activity: Activity = await fetch(`${apiUrl}/activities/${id}`).then(
-    (res) => res.json()
-  );
+  const user = await getAuthUser();
+  const activity = await get(id);
 
   return (
     <GeneralLayout>
-      <Title text={activity.name} />
-      <Typography>{activity.description}</Typography>
-      <Typography>{activity.startDate.toString()}</Typography>
-      <Typography>{activity.endDate.toString()}</Typography>
-      <Typography>{activity.location}</Typography>
-      <Typography>{activity.maxParticipants}</Typography>
-      <Typography>{activity.fee}</Typography>
-      <Typography>{activity.type}</Typography>
+      <ActivityInfo activity={activity} user={user} />
     </GeneralLayout>
   );
 }
