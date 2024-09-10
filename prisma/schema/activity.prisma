@@ -1,18 +1,21 @@
 model Activity {
-  id              Int      @id @default(autoincrement())
+  id              Int           @id @default(autoincrement())
   name            String
   description     String
   image           String?
   startDate       DateTime
-  endDate         DateTime @default(now())
-  fee             Int      @default(0)
+  endDate         DateTime      @default(now())
+  fee             Int           @default(0)
   location        String
   address         String?
   creatorId       Int
   maxParticipants Int
   type            String
-  is_active       Boolean  @default(false)
-  is_deleted      Boolean  @default(false)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  is_active       Boolean       @default(false)
+  is_deleted      Boolean       @default(false)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  participants    Participant[]
+  User            User?         @relation(fields: [userId], references: [id])
+  userId          Int?
 }
