@@ -44,6 +44,9 @@ export const get = async (id: string) => {
     where: {
       id: parseInt(id),
     },
+    include: {
+      participants: true,
+    },
   });
 
   if (!activity) {
