@@ -2,72 +2,75 @@
 
 import { Activity, Participant, User } from "@prisma/client";
 import Title from "../Title";
-import { Typography } from "@mui/material";
+import { CircularProgress, Typography } from "@mui/material";
 import { useState } from "react";
 import { userAgent } from "next/server";
 import Button from "../Button";
+import { useGlobalStore } from "providers/StoreProvider";
+import { redirect, useParams, useSearchParams } from "next/navigation";
+import { useActivity } from "hooks/api/useActivity";
+import { useJoinActivityMutation } from "hooks/api/useJoinActivityMutation";
+import { useLeaveActivityMutation } from "hooks/api/useLeaveActivityMutation";
+import { useArchiveActivityMutation } from "hooks/api/useArchiveActivityMutation";
 
 export type ActivityWithParticipants = Activity & {
   participants: Participant[];
 };
 
-interface ActivityInfoProps {
-  activity: ActivityWithParticipants;
-  user?: User;
-}
+export default function ActivityInfo() {
+  const { session } = useGlobalStore((state) => state);
 
-export default function ActivityInfo(props: ActivityInfoProps) {
-  const { activity: defaultActivity, user } = props;
+  const user = session?.authUser;
 
-  const [activity, setActivity] =
-    useState<ActivityWithParticipants>(defaultActivity);
+  const params = useParams();
 
-  const [loading, setLoading] = useState(false);
+  const { id } = params;
 
-  const isJoined = activity.participants.some(
+  const {
+    data: activity,
+    isLoading: fetchingActivity,
+    refetch,
+  } = useActivity(parseInt(id as string));
+
+  const joinActivityMutation = useJoinActivityMutation({
+    onSuccess: refetch,
+  });
+  const leaveActivityMutation = useLeaveActivityMutation({
+    onSuccess: refetch,
+  });
+  const archiveMutation = useArchiveActivityMutation({
+    onSuccess: refetch,
+  });
+
+  const isJoined = activity?.participants.some(
     (participant) => !participant.is_deleted && participant.userId === user?.id
   );
 
-  const isOwner = activity.creatorId === user?.id;
-
-  const updateActivity = async () => {
-    const newActivity = await fetch(`/api/activities/${activity.id}`).then(
-      (res) => res.json()
-    );
-    setActivity(newActivity);
-  };
+  const isOwner = activity?.creatorId === user?.id;
 
   const handleJoin = async () => {
-    setLoading(true);
-    await fetch(`/api/activities/join/${activity.id}`, {
-      method: "POST",
-    });
-    setLoading(false);
-    updateActivity();
+    await joinActivityMutation.mutateAsync(id as string);
   };
   const handleLeave = async () => {
-    setLoading(true);
-    await fetch(`/api/activities/disjoin/${activity.id}`, {
-      method: "POST",
-    });
-    setLoading(false);
-    updateActivity();
+    await leaveActivityMutation.mutateAsync(id as string);
   };
-
   const handleArchive = async () => {
-    setLoading(true);
-    await fetch(`/api/activities/${activity.id}`, {
-      method: "DELETE",
-    });
-    setLoading(false);
-    updateActivity();
+    await archiveMutation.mutateAsync(id as string);
   };
 
-  return (
+  if (!id) {
+    redirect("/");
+  }
+
+  return activity ? (
     <>
       <Title text={activity.name} />
-      {activity.is_active && (
-        <Button isLoading={loading} variant="outlined" onClick={handleArchive}>
+      {activity.is_active && activity.creatorId === user?.id && (
+        <Button
+          variant="outlined"
+          onClick={handleArchive}
+          isLoading={archiveMutation.isLoading}
+        >
           封存活動
         </Button>
       )}
@@ -76,8 +79,8 @@ export default function ActivityInfo(props: ActivityInfoProps) {
       {user && !isOwner && !isJoined && activity.is_active && (
         <Button
           variant="contained"
-          isLoading={loading}
           onClick={handleJoin}
+          isLoading={joinActivityMutation.isLoading}
           sx={{
             color: "white",
           }}
@@ -86,7 +89,11 @@ export default function ActivityInfo(props: ActivityInfoProps) {
         </Button>
       )}
       {user && !isOwner && isJoined && activity.is_active && (
-        <Button variant="outlined" isLoading={loading} onClick={handleLeave}>
+        <Button
+          variant="outlined"
+          isLoading={leaveActivityMutation.isLoading}
+          onClick={handleLeave}
+        >
           退出活動
         </Button>
       )}
@@ -98,5 +105,7 @@ export default function ActivityInfo(props: ActivityInfoProps) {
       <Typography>{activity.fee}</Typography>
       <Typography>{activity.type}</Typography>
     </>
+  ) : (
+    <CircularProgress />
   );
 }
