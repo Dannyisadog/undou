@@ -21,16 +21,22 @@ export const GET = async (
 };
 
 export const DELETE = auth(async (req, { params }) => {
-  try {
-    const id = parseInt(params?.id as string);
+  if (req.auth) {
+    try {
+      const id = parseInt(params?.id as string);
 
-    await archive(id);
+      await archive(id);
 
-    return NextResponse.json({ message: "Activity archived" }, { status: 201 });
-  } catch (e) {
-    return NextResponse.json(
-      { message: (e as Error).message },
-      { status: 400 }
-    );
+      return NextResponse.json(
+        { message: "Activity archived" },
+        { status: 201 }
+      );
+    } catch (e) {
+      return NextResponse.json(
+        { message: (e as Error).message },
+        { status: 400 }
+      );
+    }
+  } else {
   }
 });
