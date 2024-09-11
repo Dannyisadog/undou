@@ -13,7 +13,7 @@ export type ActivityWithParticipants = Activity & {
 
 interface ActivityInfoProps {
   activity: ActivityWithParticipants;
-  user: User;
+  user?: User;
 }
 
 export default function ActivityInfo(props: ActivityInfoProps) {
@@ -25,10 +25,10 @@ export default function ActivityInfo(props: ActivityInfoProps) {
   const [loading, setLoading] = useState(false);
 
   const isJoined = activity.participants.some(
-    (participant) => !participant.is_deleted && participant.userId === user.id
+    (participant) => !participant.is_deleted && participant.userId === user?.id
   );
 
-  const isOwner = activity.creatorId === user.id;
+  const isOwner = activity.creatorId === user?.id;
 
   const updateActivity = async () => {
     const newActivity = await fetch(`/api/activities/${activity.id}`).then(
@@ -73,7 +73,7 @@ export default function ActivityInfo(props: ActivityInfoProps) {
       )}
       {!activity.is_active && <Typography>活動已封存</Typography>}
       {isOwner && <Typography>你是活動的主辦人</Typography>}
-      {!isOwner && !isJoined && activity.is_active && (
+      {user && !isOwner && !isJoined && activity.is_active && (
         <Button
           variant="contained"
           isLoading={loading}
@@ -85,7 +85,7 @@ export default function ActivityInfo(props: ActivityInfoProps) {
           參加活動
         </Button>
       )}
-      {!isOwner && isJoined && activity.is_active && (
+      {user && !isOwner && isJoined && activity.is_active && (
         <Button variant="outlined" isLoading={loading} onClick={handleLeave}>
           退出活動
         </Button>
