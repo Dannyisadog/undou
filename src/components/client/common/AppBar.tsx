@@ -6,6 +6,7 @@ import {
   AppBar as MuiAppBar,
   Stack,
   Toolbar,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import Image from "next/image";
@@ -16,6 +17,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import multiavatar from "@multiavatar/multiavatar/esm";
 import Button from "../Button";
 import { useGlobalStore } from "providers/StoreProvider";
+import BugReportIcon from "@mui/icons-material/BugReport";
 
 interface AppBarProps {
   openDrawer: () => void;
@@ -88,16 +90,14 @@ export default function AppBar(props: AppBarProps) {
               </IconButton>
             )}
           </Stack>
-          <TextField
-            variant="outlined"
-            size="small"
-            placeholder="搜尋活動類型或名稱..."
-            InputProps={{ sx: { borderRadius: 8, fontSize: 14, px: 1 } }}
-            sx={{
-              maxWidth: isDesktopSize ? 400 : 300,
-              ml: isDesktopSize ? 2 : 1,
-            }}
-          />
+          <Tooltip title="運動火腿目前處於測試階段">
+            <Stack direction="row" alignItems="center">
+              <BugReportIcon />
+              <Typography fontWeight="bold" variant="body2">
+                Beta
+              </Typography>
+            </Stack>
+          </Tooltip>
         </Stack>
         <Stack>
           {authUser ? (

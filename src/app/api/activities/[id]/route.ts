@@ -1,4 +1,5 @@
-import { get } from "app/repository/activity";
+import { archive, get } from "app/repository/activity";
+import { auth } from "auth";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (
@@ -18,3 +19,18 @@ export const GET = async (
     });
   }
 };
+
+export const DELETE = auth(async (req, { params }) => {
+  try {
+    const id = parseInt(params?.id as string);
+
+    await archive(id);
+
+    return NextResponse.json({ message: "Activity archived" }, { status: 201 });
+  } catch (e) {
+    return NextResponse.json(
+      { message: (e as Error).message },
+      { status: 400 }
+    );
+  }
+});

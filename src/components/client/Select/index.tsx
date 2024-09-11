@@ -52,6 +52,9 @@ export default function Select<T>(props: SelectProps<T>) {
 
           return renderLabel(selected);
         }}
+        sx={{
+          backgroundColor: "white",
+        }}
       >
         {items.map((item, index) => (
           <MuiMenuItem key={index} value={item as MenuItemValue<T>}>

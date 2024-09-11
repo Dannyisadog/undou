@@ -9,6 +9,8 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
   color: #0c254c;
+  min-height: 100vh;
+  background-color: #fffdf9;
   padding-right: 0 !important;
 }
 

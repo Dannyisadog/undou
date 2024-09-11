@@ -31,6 +31,13 @@ export const list = async (params: ListParams): Promise<Activity[]> => {
 
   activities = await prisma.activity.findMany({
     where: conditions,
+    include: {
+      participants: {
+        where: {
+          is_deleted: false,
+        },
+      },
+    },
     orderBy: {
       updatedAt: "desc",
     },
@@ -48,7 +55,15 @@ export const listJoined = async () => {
       is_deleted: false,
     },
     include: {
-      activity: true,
+      activity: {
+        include: {
+          participants: {
+            where: {
+              is_deleted: false,
+            },
+          },
+        },
+      },
     },
   });
 
@@ -63,7 +78,11 @@ export const get = async (id: string) => {
       id: parseInt(id),
     },
     include: {
-      participants: true,
+      participants: {
+        where: {
+          is_deleted: false,
+        },
+      },
     },
   });
 
@@ -147,6 +166,33 @@ export const disjoin = async (id: number) => {
     },
     data: {
       is_deleted: true,
+    },
+  });
+};
+
+export const archive = async (id: number) => {
+  const user = await getAuthUser();
+
+  const activity = await prisma.activity.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  if (!activity) {
+    throw new Error("Activity not found");
+  }
+
+  if (activity.creatorId !== user.id) {
+    throw new Error("Not authorized");
+  }
+
+  await prisma.activity.update({
+    where: {
+      id,
+    },
+    data: {
+      is_active: false,
     },
   });
 };

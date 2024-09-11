@@ -21,7 +21,7 @@ export default function TextField(props: TextFieldProps) {
         sx={{
           "&.MuiTextField-root": {
             borderRadius: 1,
-            backgroundColor: "transparent",
+            backgroundColor: "white",
           },
         }}
         {...rest}

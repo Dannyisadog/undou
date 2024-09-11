@@ -1,35 +1,94 @@
 import { Activity } from "@prisma/client";
 import Card from "../Card";
-import { DARK_BLUE } from "colors";
+import { DARK_BLUE, PRIMARY } from "colors";
 import { Stack, Typography } from "@mui/material";
+import dayjs from "dayjs";
+import { useTypeIcon } from "hooks/useTypeIcon";
+import Image from "next/image";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import { ActivityWithParticipants } from "./ActivityInfo";
 
 interface ActivityCardProps {
-  activity: Activity;
+  activity: ActivityWithParticipants;
 }
 
 export default function ActivityCard(props: ActivityCardProps) {
   const { activity } = props;
 
+  const { getIcon } = useTypeIcon();
+
   return (
     <Card
       sx={{
-        boxShadow: "0px 3px 3px 3px #33333322",
-        backgroundColor: "white",
-        borderRadius: 3,
+        boxShadow: "0px 3px 3px #66666611",
+        borderRadius: 4,
         color: DARK_BLUE,
         padding: 2,
-        height: 180,
+        position: "relative",
       }}
     >
       <Stack spacing={0.5}>
-        <Typography variant="h5">{activity.name}</Typography>
-        <p>{activity.description}</p>
-        <p>{activity.location}</p>
-        <p>{activity.startDate.toString()}</p>
-        <p>{activity.endDate.toString()}</p>
-        <p>{activity.maxParticipants}</p>
-        <p>{activity.fee}</p>
-        <p>{activity.type}</p>
+        <Typography variant="h5" fontWeight="bold">
+          {activity.name}
+        </Typography>
+        <Stack direction="row" alignItems="center" spacing={1}>
+          <LocationOnIcon fontSize="small" />
+          <Typography>{activity.location}</Typography>
+        </Stack>
+        <Stack direction="row" alignItems="center" spacing={1}>
+          <AttachMoneyIcon fontSize="small" />
+          <Typography>{activity.fee} 元</Typography>
+        </Stack>
+        <Stack direction="row" alignItems="center" spacing={1}>
+          <PeopleAltIcon fontSize="small" />
+          <Typography>
+            {activity.participants.length} / {activity.maxParticipants}
+          </Typography>
+        </Stack>
+      </Stack>
+      <Stack
+        position="absolute"
+        right={0}
+        top={0}
+        spacing={1}
+        height="100%"
+        width={100}
+        justifyContent="center"
+        alignItems="center"
+        sx={{
+          background: PRIMARY[500],
+        }}
+      >
+        <Image
+          src={getIcon(activity.type)}
+          alt={activity.type}
+          width={36}
+          height={36}
+          priority
+        />
+        <Typography
+          color="white"
+          sx={{
+            textAlign: "center",
+            fontWeight: "bold",
+          }}
+        >
+          {dayjs(activity.startDate).month() + 1}月{" "}
+          {dayjs(activity.startDate).date()}日
+        </Typography>
+        <Typography
+          color="white"
+          fontSize={14}
+          sx={{
+            textAlign: "center",
+            fontWeight: 500,
+          }}
+        >
+          {dayjs(activity.startDate).hour()}:
+          {dayjs(activity.startDate).minute().toString().padStart(2, "0")}
+        </Typography>
       </Stack>
     </Card>
   );

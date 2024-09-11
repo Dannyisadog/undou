@@ -11,7 +11,7 @@ model Activity {
   creatorId       Int
   maxParticipants Int
   type            String
-  is_active       Boolean       @default(false)
+  is_active       Boolean       @default(true)
   is_deleted      Boolean       @default(false)
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt

@@ -4,12 +4,12 @@ import { useSearchParams } from "next/navigation";
 import { getActivityItemByType } from "util/activity";
 import Title from "../Title";
 import { useCallback, useEffect, useState } from "react";
-import { Activity } from "@prisma/client";
-import { Card, Stack, Typography } from "@mui/material";
-import { DARK_BLUE } from "colors";
+import { Stack } from "@mui/material";
 import Link from "next/link";
 import ActivityCard from "./ActivityCard";
 import ActivityListSkeleton from "./ActivityListSkeleton";
+import { ActivityWithParticipants } from "./ActivityInfo";
+import NoData from "../common/NoData";
 
 export default function ActivityList() {
   const searchParams = useSearchParams();
@@ -18,7 +18,7 @@ export default function ActivityList() {
 
   const item = getActivityItemByType(type);
 
-  const [activities, setActivities] = useState<Activity[]>([]);
+  const [activities, setActivities] = useState<ActivityWithParticipants[]>([]);
   const [loading, setLoading] = useState(false);
 
   const fetchActivities = useCallback(async () => {
@@ -38,9 +38,7 @@ export default function ActivityList() {
     <Stack width="100%" spacing={4}>
       <Title hasGoBack={false} text={item ? `${item.label}活動` : "全部活動"} />
       {loading && <ActivityListSkeleton />}
-      {activities.length === 0 && !loading && (
-        <Typography>目前沒有任何活動</Typography>
-      )}
+      {activities.length === 0 && !loading && <NoData />}
       <Stack spacing={2}>
         {activities.map((activity) => (
           <Link href={`/activity/${activity.id}`} key={activity.id}>
