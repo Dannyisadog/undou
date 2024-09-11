@@ -7,7 +7,7 @@ import { useState } from "react";
 import { userAgent } from "next/server";
 import Button from "../Button";
 
-type ActivityWithParticipants = Activity & {
+export type ActivityWithParticipants = Activity & {
   participants: Participant[];
 };
 
@@ -54,11 +54,26 @@ export default function ActivityInfo(props: ActivityInfoProps) {
     updateActivity();
   };
 
+  const handleArchive = async () => {
+    setLoading(true);
+    await fetch(`/api/activities/${activity.id}`, {
+      method: "DELETE",
+    });
+    setLoading(false);
+    updateActivity();
+  };
+
   return (
     <>
       <Title text={activity.name} />
+      {activity.is_active && (
+        <Button isLoading={loading} variant="outlined" onClick={handleArchive}>
+          封存活動
+        </Button>
+      )}
+      {!activity.is_active && <Typography>活動已封存</Typography>}
       {isOwner && <Typography>你是活動的主辦人</Typography>}
-      {!isOwner && !isJoined && (
+      {!isOwner && !isJoined && activity.is_active && (
         <Button
           variant="contained"
           isLoading={loading}
@@ -70,7 +85,7 @@ export default function ActivityInfo(props: ActivityInfoProps) {
           參加活動
         </Button>
       )}
-      {!isOwner && isJoined && (
+      {!isOwner && isJoined && activity.is_active && (
         <Button variant="outlined" isLoading={loading} onClick={handleLeave}>
           退出活動
         </Button>
