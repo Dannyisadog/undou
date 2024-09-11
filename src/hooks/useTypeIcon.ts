@@ -15,7 +15,6 @@ import BoxingIcon from "../components/client/common/Sidebar/ic-boxing.png";
 
 export const useTypeIcon = () => {
   const getIcon = (type: string) => {
-    console.log(type);
     switch (type) {
       case "basketball":
         return BasketballIcon;
