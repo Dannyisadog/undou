@@ -1,8 +1,5 @@
-import { Typography } from "@mui/material";
-import { Activity } from "@prisma/client";
 import { get } from "app/repository/activity";
 import ActivityInfo from "components/client/Activities/ActivityInfo";
-import Title from "components/client/Title";
 import GeneralLayout from "layout/GeneralLayout";
 import { getAuthUser } from "util/auth";
 
