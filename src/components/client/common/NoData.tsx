@@ -15,7 +15,7 @@ const defaultOptions = {
 export default function NoData() {
   return (
     <Stack spacing={2} alignItems="center">
-      <Lottie options={defaultOptions} height={300} width={300} />
+      <Lottie options={defaultOptions} speed={0.8} height={300} width={300} />
       <Typography color={PRIMARY.main} fontWeight="bold" fontSize={20}>
         目前沒有任何活動
       </Typography>
