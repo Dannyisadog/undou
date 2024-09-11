@@ -7,6 +7,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import { GlobalStoreProvider } from "providers/StoreProvider";
 import { auth, CustomSession } from "auth";
+import ReactQueryProvider from "providers/ReactQueryProvider";
 
 export const metadata: Metadata = {
   title: "運動火腿",
@@ -47,15 +48,17 @@ export default async function RootLayout({
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
       />
       <body>
-        <GlobalStoreProvider session={session}>
-          <ThemeProvider theme={theme}>
-            <Stack justifyContent="center">
-              {children}
-              <SpeedInsights />
-              <Analytics />
-            </Stack>
-          </ThemeProvider>
-        </GlobalStoreProvider>
+        <ReactQueryProvider>
+          <GlobalStoreProvider session={session}>
+            <ThemeProvider theme={theme}>
+              <Stack justifyContent="center">
+                {children}
+                <SpeedInsights />
+                <Analytics />
+              </Stack>
+            </ThemeProvider>
+          </GlobalStoreProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );
