@@ -2,7 +2,7 @@
 
 import { Activity, Participant, User } from "@prisma/client";
 import Title from "../Title";
-import { CircularProgress, Typography } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import { useState } from "react";
 import { userAgent } from "next/server";
 import Button from "../Button";
@@ -12,6 +12,7 @@ import { useActivity } from "hooks/api/useActivity";
 import { useJoinActivityMutation } from "hooks/api/useJoinActivityMutation";
 import { useLeaveActivityMutation } from "hooks/api/useLeaveActivityMutation";
 import { useArchiveActivityMutation } from "hooks/api/useArchiveActivityMutation";
+import RunningLoading from "../common/RunningLoading";
 
 export type ActivityWithParticipants = Activity & {
   participants: Participant[];
@@ -106,6 +107,8 @@ export default function ActivityInfo() {
       <Typography>{activity.type}</Typography>
     </>
   ) : (
-    <CircularProgress />
+    <Box pt={8}>
+      <RunningLoading />
+    </Box>
   );
 }
