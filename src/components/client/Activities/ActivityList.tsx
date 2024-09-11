@@ -18,7 +18,7 @@ export default function ActivityList() {
 
   const item = getActivityItemByType(type);
 
-  const { data: activities, isLoading } = useActivities();
+  const { data: activities, isLoading } = useActivities(type);
 
   return (
     <Stack width="100%" spacing={4}>
