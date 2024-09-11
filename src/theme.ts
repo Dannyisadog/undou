@@ -33,10 +33,11 @@ export const theme = createTheme({
       fontWeight: 600,
     },
     h4: {
-      fontSize: "2rem",
+      fontSize: "1.8rem",
       fontWeight: 600,
     },
     h5: {
+      fontSize: "1.3rem",
       fontWeight: 600,
     },
   },
