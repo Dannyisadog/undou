@@ -10,7 +10,7 @@ function ActivityItemSkeleton() {
         backgroundColor: "white",
         borderRadius: 3,
         padding: 2,
-        height: 180,
+        height: 150,
       }}
     >
       <Stack spacing={2}>
@@ -28,7 +28,7 @@ function ActivityItemSkeleton() {
 
 export default function ActivityListSkeleton() {
   return (
-    <Stack spacing={4}>
+    <Stack spacing={2}>
       <ActivityItemSkeleton />
       <ActivityItemSkeleton />
       <ActivityItemSkeleton />
