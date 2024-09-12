@@ -9,6 +9,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import { ActivityWithParticipants } from "./ActivityInfo";
+import { useScreenSize } from "hooks/useScreenSize";
 
 interface ActivityCardProps {
   activity: ActivityWithParticipants;
@@ -19,33 +20,42 @@ export default function ActivityCard(props: ActivityCardProps) {
 
   const { getIcon } = useTypeIcon();
 
+  const { isDesktopSize } = useScreenSize();
+
   return (
     <Card
       sx={{
         boxShadow: "0px 3px 3px #66666611",
         borderRadius: 4,
         color: DARK_BLUE,
-        padding: 2,
         position: "relative",
+        p: 2,
+        paddingRight: "116px !important",
       }}
     >
-      <Stack spacing={0.5}>
-        <Typography variant="h5" fontWeight="bold">
+      <Stack spacing={1.5}>
+        <Typography
+          variant="h5"
+          fontSize={isDesktopSize ? "1.4rem" : "1.2rem"}
+          fontWeight="bold"
+        >
           {activity.name}
         </Typography>
-        <Stack direction="row" alignItems="center" spacing={1}>
-          <LocationOnIcon fontSize="small" />
-          <Typography>{activity.location}</Typography>
-        </Stack>
-        <Stack direction="row" alignItems="center" spacing={1}>
-          <AttachMoneyIcon fontSize="small" />
-          <Typography>{activity.fee} 元</Typography>
-        </Stack>
-        <Stack direction="row" alignItems="center" spacing={1}>
-          <PeopleAltIcon fontSize="small" />
-          <Typography>
-            {activity.participants.length} / {activity.maxParticipants}
-          </Typography>
+        <Stack spacing={0.5}>
+          <Stack direction="row" alignItems="center" spacing={1}>
+            <LocationOnIcon fontSize="small" />
+            <Typography>{activity.location}</Typography>
+          </Stack>
+          <Stack direction="row" alignItems="center" spacing={1}>
+            <AttachMoneyIcon fontSize="small" />
+            <Typography>{activity.fee} 元</Typography>
+          </Stack>
+          <Stack direction="row" alignItems="center" spacing={1}>
+            <PeopleAltIcon fontSize="small" />
+            <Typography>
+              {activity.participants.length} / {activity.maxParticipants}
+            </Typography>
+          </Stack>
         </Stack>
       </Stack>
       <Stack
