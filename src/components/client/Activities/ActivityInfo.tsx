@@ -13,6 +13,7 @@ import { useJoinActivityMutation } from "hooks/api/useJoinActivityMutation";
 import { useLeaveActivityMutation } from "hooks/api/useLeaveActivityMutation";
 import { useArchiveActivityMutation } from "hooks/api/useArchiveActivityMutation";
 import RunningLoading from "../common/RunningLoading";
+import { useScreenSize } from "hooks/useScreenSize";
 
 export type ActivityWithParticipants = Activity & {
   participants: Participant[];
@@ -46,6 +47,8 @@ export default function ActivityInfo() {
   const isJoined = activity?.participants.some(
     (participant) => !participant.is_deleted && participant.userId === user?.id
   );
+
+  const { isMobileSize } = useScreenSize();
 
   const isOwner = activity?.creatorId === user?.id;
 
@@ -107,7 +110,7 @@ export default function ActivityInfo() {
       <Typography>{activity.type}</Typography>
     </>
   ) : (
-    <Box pt={8}>
+    <Box pt={isMobileSize ? "20vh" : "15vh"}>
       <RunningLoading />
     </Box>
   );
