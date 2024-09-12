@@ -61,6 +61,9 @@ export const listJoined = async () => {
             where: {
               is_deleted: false,
             },
+            include: {
+              user: true,
+            },
           },
         },
       },
@@ -81,6 +84,9 @@ export const get = async (id: string) => {
       participants: {
         where: {
           is_deleted: false,
+        },
+        include: {
+          user: true,
         },
       },
     },
