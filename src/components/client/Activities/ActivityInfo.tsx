@@ -78,9 +78,9 @@ export default function ActivityInfo() {
   const item = items.find((item) => item.type === activity?.type);
 
   return activity ? (
-    <>
+    <Stack pt={isMobileSize ? 0 : 4}>
       <Title text={activity.name} />
-      <Stack spacing={2} pt={2} width="100%">
+      <Stack spacing={2} pt={2} width="100%" mt={2}>
         <TextItem
           label="活動類型"
           text={item?.label ?? "未知"}
@@ -122,7 +122,7 @@ export default function ActivityInfo() {
         leaveLoading={leaveActivityMutation.isLoading}
         archiveLoading={archiveMutation.isLoading}
       />
-    </>
+    </Stack>
   ) : (
     <Box pt={isMobileSize ? "20vh" : "15vh"}>
       <RunningLoading />
