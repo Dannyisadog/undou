@@ -33,7 +33,7 @@ export default function GeneralLayout(props: GeneralLayoutProps) {
           width="100%"
           maxWidth="1080px"
           alignItems="center"
-          px={isDesktopSize ? 3 : 2}
+          px={isDesktopSize ? 0 : 2}
           sx={{
             margin: "0 auto",
           }}
