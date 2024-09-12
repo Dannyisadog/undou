@@ -99,6 +99,11 @@ export default function AppBar(props: AppBarProps) {
             </Stack>
           </Tooltip>
         </Stack>
+        <Link href="/privacy">
+          <Typography fontSize={12} color="white">
+            隱私權政策
+          </Typography>
+        </Link>
         <Stack>
           {authUser ? (
             <Link href="/profile">
