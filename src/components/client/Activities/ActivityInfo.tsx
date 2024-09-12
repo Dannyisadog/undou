@@ -2,7 +2,7 @@
 
 import { Activity, Participant, User } from "@prisma/client";
 import Title from "../Title";
-import { Box, CircularProgress, Typography } from "@mui/material";
+import { Box, CircularProgress, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import { userAgent } from "next/server";
 import Button from "../Button";
@@ -14,6 +14,15 @@ import { useLeaveActivityMutation } from "hooks/api/useLeaveActivityMutation";
 import { useArchiveActivityMutation } from "hooks/api/useArchiveActivityMutation";
 import RunningLoading from "../common/RunningLoading";
 import { useScreenSize } from "hooks/useScreenSize";
+import ActivityInfoFooter from "./ActivityInfoFooter";
+import TextItem from "./TextItem";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import CelebrationIcon from "@mui/icons-material/Celebration";
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import dayjs from "dayjs";
+import { items } from "../common/Sidebar";
 
 export type ActivityWithParticipants = Activity & {
   participants: Participant[];
@@ -66,48 +75,53 @@ export default function ActivityInfo() {
     redirect("/");
   }
 
+  const item = items.find((item) => item.type === activity?.type);
+
   return activity ? (
     <>
       <Title text={activity.name} />
-      {activity.is_active && activity.creatorId === user?.id && (
-        <Button
-          variant="outlined"
-          onClick={handleArchive}
-          isLoading={archiveMutation.isLoading}
-        >
-          封存活動
-        </Button>
-      )}
-      {!activity.is_active && <Typography>活動已封存</Typography>}
-      {isOwner && <Typography>你是活動的主辦人</Typography>}
-      {user && !isOwner && !isJoined && activity.is_active && (
-        <Button
-          variant="contained"
-          onClick={handleJoin}
-          isLoading={joinActivityMutation.isLoading}
-          sx={{
-            color: "white",
-          }}
-        >
-          參加活動
-        </Button>
-      )}
-      {user && !isOwner && isJoined && activity.is_active && (
-        <Button
-          variant="outlined"
-          isLoading={leaveActivityMutation.isLoading}
-          onClick={handleLeave}
-        >
-          退出活動
-        </Button>
-      )}
-      <Typography>{activity.description}</Typography>
-      <Typography>{activity.startDate.toString()}</Typography>
-      <Typography>{activity.endDate.toString()}</Typography>
-      <Typography>{activity.location}</Typography>
-      <Typography>{activity.maxParticipants}</Typography>
-      <Typography>{activity.fee}</Typography>
-      <Typography>{activity.type}</Typography>
+      <Stack spacing={2} pt={2} width="100%">
+        <TextItem
+          label="活動類型"
+          text={item?.label ?? "未知"}
+          icon={<CelebrationIcon color="primary" />}
+        />
+        <TextItem
+          label="地點"
+          text={activity.location}
+          icon={<LocationOnIcon color="primary" />}
+        />
+        <TextItem
+          label="費用 (現場付款)"
+          text={activity.fee.toString()}
+          icon={<AttachMoneyIcon color="primary" />}
+        />
+        <TextItem
+          label="開始時間"
+          text={dayjs(activity.startDate).format("YYYY-MM-DD HH:mm")}
+          icon={<CalendarMonthIcon color="primary" />}
+        />
+        <TextItem
+          label="結束時間"
+          text={dayjs(activity.endDate).format("YYYY-MM-DD HH:mm")}
+          icon={<CalendarMonthIcon color="primary" />}
+        />
+        <TextItem
+          label="活動描述"
+          text={activity.description}
+          icon={<AssignmentIcon color="primary" />}
+        />
+      </Stack>
+      <ActivityInfoFooter
+        handleJoin={handleJoin}
+        handleLeave={handleLeave}
+        handleArchive={handleArchive}
+        activity={activity}
+        user={user}
+        joinLoading={joinActivityMutation.isLoading}
+        leaveLoading={leaveActivityMutation.isLoading}
+        archiveLoading={archiveMutation.isLoading}
+      />
     </>
   ) : (
     <Box pt={isMobileSize ? "20vh" : "15vh"}>
