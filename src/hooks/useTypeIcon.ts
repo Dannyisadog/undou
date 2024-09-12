@@ -26,7 +26,7 @@ export const useTypeIcon = () => {
         return RunningIcon;
       case "mountaineering":
         return ClimbIcon;
-      case "bicycle":
+      case "cycling":
         return BicycleIcon;
       case "swimming":
         return SwimIcon;
@@ -36,11 +36,11 @@ export const useTypeIcon = () => {
         return DanceIcon;
       case "volleyball":
         return VolleyballIcon;
-      case "pingpong":
+      case "table_tennis":
         return PingpongIcon;
       case "golf":
         return GolfIcon;
-      case "boxing":
+      case "tai_chi":
         return BoxingIcon;
       default:
         return AllIcon;
