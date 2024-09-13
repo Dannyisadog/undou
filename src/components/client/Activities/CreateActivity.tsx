@@ -57,6 +57,8 @@ export default function CreateActivity() {
           type: values.type,
           startDate: values.startDate?.toISOString(),
           endDate: values.endDate?.toISOString(),
+          city: values.city,
+          area: values.area,
           maxParticipants: values.maxParticipants,
           fee: values.fee,
           location: values.location,
