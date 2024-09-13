@@ -20,7 +20,8 @@ export const metadata: Metadata = {
     url: "https://undou.dannyisadog.com",
     title: "運動火腿 | 一起來運動",
     siteName: "運動火腿",
-    description: "大家一起來運動",
+    description:
+      "專為運動愛好者設計的平台，讓大家聚在一起分享運動樂趣。無論是跑步、瑜伽或健身，都能在這裡找到夥伴，一同參與各種活動，享受健康生活與社交的結合。",
     images: [
       {
         url: "/og-image.png",
