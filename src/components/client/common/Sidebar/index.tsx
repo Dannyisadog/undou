@@ -20,6 +20,8 @@ import TennisIcon from "./ic-tennis.png";
 import TennisActiveIcon from "./ic-tennis-active.png";
 import RunningIcon from "./ic-running.png";
 import RunningActiveIcon from "./ic-running-active.png";
+import RockClimbIcon from "./ic-rock-climbing.png";
+import RockClimbActiveIcon from "./ic-rock-climbing-active.png";
 import ClimbIcon from "./ic-climb.png";
 import ClimbActiveIcon from "./ic-climb-active.png";
 import BicycleIcon from "./ic-bicycle.png";
@@ -105,6 +107,13 @@ export const items: SidebarItem[] = [
       "台灣人日常生活中的運動之一，常見於公園或河濱步道，路跑比賽也很受歡迎。",
     icon: RunningIcon,
     activeIcon: RunningActiveIcon,
+  },
+  {
+    type: "rock_climbing",
+    label: "抱石／攀岩",
+    description: "近年來越來越受歡迎的運動，許多攀岩館提供場地和課程。",
+    icon: RockClimbIcon,
+    activeIcon: RockClimbActiveIcon,
   },
   {
     type: "mountaineering",
