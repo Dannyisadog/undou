@@ -14,10 +14,14 @@ import { redirect, useRouter } from "next/navigation";
 import { activitySchema } from "validation/activity";
 import { useGlobalStore } from "providers/StoreProvider";
 import dayjs from "dayjs";
+import CitySelect from "../CitySelect";
+import AreaSelect from "../AreaSelect";
 
 export type ActivityType = {
   name: string;
   type?: string;
+  city?: string;
+  area?: string;
   startDate?: Date;
   endDate?: Date;
   maxParticipants: number;
@@ -42,7 +46,7 @@ export default function CreateActivity() {
       address: "",
       description: "",
     },
-    validateOnChange: true,
+    validateOnChange: false,
     validationSchema: activitySchema,
     onSubmit: async (values) => {
       setLoading(true);
@@ -53,6 +57,8 @@ export default function CreateActivity() {
           type: values.type,
           startDate: values.startDate?.toISOString(),
           endDate: values.endDate?.toISOString(),
+          city: values.city,
+          area: values.area,
           maxParticipants: values.maxParticipants,
           fee: values.fee,
           location: values.location,
@@ -148,6 +154,23 @@ export default function CreateActivity() {
           label="費用"
           onChange={(e) => {
             formik.setFieldValue("fee", parseInt(e.target.value));
+          }}
+        />
+      </Stack>
+      <Stack direction={direction} spacing={2} width="100%">
+        <CitySelect
+          error={!!formik.errors.city}
+          helperText={formik.errors.city}
+          onChange={(value) => {
+            formik.setFieldValue("city", value);
+          }}
+        />
+        <AreaSelect
+          city={formik.values.city}
+          error={!!formik.errors.area}
+          helperText={formik.errors.area}
+          onChange={(value) => {
+            formik.setFieldValue("area", value);
           }}
         />
       </Stack>

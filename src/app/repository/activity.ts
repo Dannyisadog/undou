@@ -57,6 +57,7 @@ export const listJoined = async () => {
     include: {
       activity: {
         include: {
+          owner: true,
           participants: {
             where: {
               is_deleted: false,
@@ -81,6 +82,7 @@ export const get = async (id: string) => {
       id: parseInt(id),
     },
     include: {
+      owner: true,
       participants: {
         where: {
           is_deleted: false,
@@ -110,7 +112,10 @@ export const create = async (params: any): Promise<Activity> => {
     image,
     startDate,
     endDate,
+    city,
+    area,
     location,
+    address,
     maxParticipants,
     fee,
     type,
@@ -124,7 +129,10 @@ export const create = async (params: any): Promise<Activity> => {
       image,
       startDate,
       endDate,
+      city,
+      area,
       location,
+      address,
       maxParticipants,
       fee,
       type,

@@ -23,7 +23,7 @@ import CelebrationIcon from "@mui/icons-material/Celebration";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import dayjs from "dayjs";
 import { items } from "../common/Sidebar";
-import UserList from "./UserList";
+import UserList, { UserListItem } from "./UserList";
 import ShareButton from "./ShareButton";
 
 export type ParticipantWithUser = Participant & {
@@ -32,6 +32,7 @@ export type ParticipantWithUser = Participant & {
 
 export type ActivityWithParticipants = Activity & {
   participants: ParticipantWithUser[];
+  owner: User;
 };
 
 export default function ActivityInfo() {
@@ -86,8 +87,6 @@ export default function ActivityInfo() {
       return participant.user;
     }) ?? [];
 
-  user && joinedUser.unshift(user);
-
   return activity ? (
     <Stack pt={isMobileSize ? 0 : 4} width="100%" spacing={2}>
       <Title text={activity.name} />
@@ -141,8 +140,14 @@ export default function ActivityInfo() {
           />
         </Stack>
         <Stack spacing={2} width="100%">
-          <Typography variant="h5">參加名單</Typography>
-          <UserList users={joinedUser} />
+          <Stack spacing={2} width="100%">
+            <Typography variant="h5">擁有者</Typography>
+            <UserListItem user={activity.owner} />
+          </Stack>
+          <Stack spacing={2} width="100%">
+            <Typography variant="h5">參加名單</Typography>
+            <UserList users={joinedUser} />
+          </Stack>
         </Stack>
       </Stack>
       <ActivityInfoFooter
