@@ -11,19 +11,21 @@ import ReactQueryProvider from "providers/ReactQueryProvider";
 
 export const metadata: Metadata = {
   title: "運動火腿",
-  description: "大家一起來運動",
+  description:
+    "專為運動愛好者設計的平台，讓大家聚在一起分享運動樂趣。無論是跑步、瑜伽或健身，都能在這裡找到夥伴，一同參與各種活動，享受健康生活與社交的結合。",
   keywords:
     "運動, 羽球, 籃球, 棒球, 網球, 足球, 棒球, 桌球, 撞球, 游泳, 滑板, 滑雪, 滑冰, 滑輪, 滑板, 滑水, 滑翔",
   openGraph: {
     type: "website",
     url: "https://undou.dannyisadog.com",
-    title: "運動火腿",
+    title: "運動火腿 | 一起來運動",
+    siteName: "運動火腿",
     description: "大家一起來運動",
     images: [
       {
         url: "/og-image.png",
-        width: 1200,
-        height: 630,
+        width: 400,
+        height: 400,
         alt: "運動火腿",
       },
     ],
