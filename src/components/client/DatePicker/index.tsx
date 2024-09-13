@@ -29,10 +29,12 @@ export default function DatePicker(props: DateTimePickerProps) {
         <MuiDateTimePicker
           format="YYYY/MM/DD HH:mm"
           sx={{
-            backgroundColor: "white",
             width: fullWidth ? "100%" : "auto",
             fieldset: {
               border: error ? "1px solid #d32f2f;" : "1px solid #E0E0E0",
+            },
+            ".MuiInputBase-root": {
+              backgroundColor: "white",
             },
             "& .MuiOutlinedInput-root": {
               "&:hover fieldset": {
@@ -41,6 +43,10 @@ export default function DatePicker(props: DateTimePickerProps) {
               "&.Mui-focused fieldset": {
                 borderColor: error ? "#d32f2f" : PRIMARY.main,
               },
+            },
+            ".MuiFormHelperText-root": {
+              mx: 0,
+              color: error ? "#d32f2f" : "#E0E0E0",
             },
           }}
           {...rest}
