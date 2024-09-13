@@ -28,10 +28,14 @@ import SwimIcon from "./ic-swim.png";
 import SwimActiveIcon from "./ic-swim-active.png";
 import YogaIcon from "./ic-yoga.png";
 import YogaActiveIcon from "./ic-yoga-active.png";
+import FitnessIcon from "./ic-fitness.png";
+import FitnessActiveIcon from "./ic-fitness-active.png";
 import DanceIcon from "./ic-dance.png";
 import DanceActiveIcon from "./ic-dance-active.png";
 import VolleyballIcon from "./ic-volleyball.png";
 import VolleyballActiveIcon from "./ic-volleyball-active.png";
+import BowlingIcon from "./ic-bowling.png";
+import BowlingActiveIcon from "./ic-bowling-active.png";
 import PingpongIcon from "./ic-pingpong.png";
 import PingpongActiveIcon from "./ic-pingpong-active.png";
 import GolfIcon from "./ic-golf.png";
@@ -73,12 +77,26 @@ export const items: SidebarItem[] = [
     activeIcon: BadminActiveIcon,
   },
   {
-    // 網球
     type: "tennis",
     label: "網球",
     description: "網球是一種運動，通常在網球場上進行。",
     icon: TennisIcon,
     activeIcon: TennisActiveIcon,
+  },
+  {
+    type: "volleyball",
+    label: "排球",
+    description: "雖然不如籃球那麼普遍，但台灣也有許多人在學校或社區玩排球。",
+    icon: VolleyballIcon,
+    activeIcon: VolleyballActiveIcon,
+  },
+  {
+    type: "table_tennis",
+    label: "桌球（乒乓球）",
+    description:
+      "在學校或社區活動中心常見的運動，場地需求小，適合多人一起進行。",
+    icon: PingpongIcon,
+    activeIcon: PingpongActiveIcon,
   },
   {
     type: "running",
@@ -111,6 +129,13 @@ export const items: SidebarItem[] = [
     activeIcon: SwimActiveIcon,
   },
   {
+    type: "fitness",
+    label: "健身",
+    description: "台灣許多健身房提供各種健身課程，如重訓、有氧、瑜伽等。",
+    icon: FitnessIcon,
+    activeIcon: FitnessActiveIcon,
+  },
+  {
     type: "yoga",
     label: "瑜伽",
     description:
@@ -126,26 +151,18 @@ export const items: SidebarItem[] = [
     activeIcon: DanceActiveIcon,
   },
   {
-    type: "volleyball",
-    label: "排球",
-    description: "雖然不如籃球那麼普遍，但台灣也有許多人在學校或社區玩排球。",
-    icon: VolleyballIcon,
-    activeIcon: VolleyballActiveIcon,
-  },
-  {
-    type: "table_tennis",
-    label: "桌球（乒乓球）",
-    description:
-      "在學校或社區活動中心常見的運動，場地需求小，適合多人一起進行。",
-    icon: PingpongIcon,
-    activeIcon: PingpongActiveIcon,
-  },
-  {
     type: "golf",
     label: "高爾夫",
     description: "較昂貴的運動，但仍有不少人喜歡相約一起進行。",
     icon: GolfIcon,
     activeIcon: GolfActiveIcon,
+  },
+  {
+    type: "bowling",
+    label: "保齡球",
+    description: "適合家庭或朋友一起參與。",
+    icon: BowlingIcon,
+    activeIcon: BowlingActiveIcon,
   },
   {
     type: "tai_chi",
