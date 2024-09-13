@@ -119,6 +119,11 @@ export default function ActivityInfo() {
             icon={<LocationOnIcon color="primary" />}
           />
           <TextItem
+            label="縣市-區"
+            text={activity.city + "-" + activity.area}
+            icon={<LocationOnIcon color="primary" />}
+          />
+          <TextItem
             label="費用 (現場付款)"
             text={activity.fee.toString()}
             icon={<AttachMoneyIcon color="primary" />}
