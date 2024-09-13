@@ -305,6 +305,7 @@ export default function Sidebar(props: SidebarProps) {
             key={item.type}
             text={item.label}
             active={isActive(item.type)}
+            description={item.description}
             href={getHref(item.type)}
             icon={
               <Image
