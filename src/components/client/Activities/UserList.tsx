@@ -15,6 +15,39 @@ interface UserListProps {
   users: User[];
 }
 
+interface UserListItemProps {
+  user: User;
+}
+
+export const UserListItem = (props: UserListItemProps) => {
+  const { user } = props;
+
+  const svgCode = multiavatar(user.email as string);
+
+  return (
+    <ListItem
+      key={user.id}
+      sx={{
+        px: 0,
+      }}
+    >
+      <ListItemAvatar>
+        {!user.image && (
+          <Avatar>
+            <Box
+              dangerouslySetInnerHTML={{ __html: svgCode }}
+              width="100%"
+              height="100%"
+            />
+          </Avatar>
+        )}
+        {user.image && <Avatar src={user.image} />}
+      </ListItemAvatar>
+      <ListItemText primary={user.name} secondary={user.email} />
+    </ListItem>
+  );
+};
+
 export default function UserList(props: UserListProps) {
   const { users } = props;
   return (
@@ -24,29 +57,7 @@ export default function UserList(props: UserListProps) {
       }}
     >
       {users.map((user) => {
-        const svgCode = multiavatar(user.email as string);
-        return (
-          <ListItem
-            key={user.id}
-            sx={{
-              px: 0,
-            }}
-          >
-            <ListItemAvatar>
-              {!user.image && (
-                <Avatar>
-                  <Box
-                    dangerouslySetInnerHTML={{ __html: svgCode }}
-                    width="100%"
-                    height="100%"
-                  />
-                </Avatar>
-              )}
-              {user.image && <Avatar src={user.image} />}
-            </ListItemAvatar>
-            <ListItemText primary={user.name} secondary={user.email} />
-          </ListItem>
-        );
+        return <UserListItem key={user.id} user={user} />;
       })}
     </List>
   );
