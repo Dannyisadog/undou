@@ -9,6 +9,8 @@ export const activitySchema = yup.object().shape({
     .date()
     .required("請輸入活動結束時間")
     .min(yup.ref("startDate"), "結束時間必須晚於開始時間"),
+  city: yup.string().required("請輸入活動城市"),
+  area: yup.string().required("請輸入活動區域"),
   location: yup.string().required("請輸入活動地點"),
   address: yup.string().required("請輸入活動地址"),
   maxParticipants: yup

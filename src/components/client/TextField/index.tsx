@@ -21,7 +21,15 @@ export default function TextField(props: TextFieldProps) {
         sx={{
           "&.MuiTextField-root": {
             borderRadius: 1,
+          },
+          ".MuiInputBase-root": {
             backgroundColor: "white",
+          },
+        }}
+        FormHelperTextProps={{
+          style: {
+            marginLeft: 0,
+            marginRight: 0,
           },
         }}
         {...rest}
