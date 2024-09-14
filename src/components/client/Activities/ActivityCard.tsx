@@ -10,6 +10,7 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import { ActivityWithParticipants } from "./ActivityInfo";
 import { useScreenSize } from "hooks/useScreenSize";
+import { getDayOfDate } from "util/activity";
 
 interface ActivityCardProps {
   activity: ActivityWithParticipants;
@@ -62,7 +63,7 @@ export default function ActivityCard(props: ActivityCardProps) {
         position="absolute"
         right={0}
         top={0}
-        spacing={1}
+        spacing={0.5}
         height="100%"
         width={100}
         justifyContent="center"
@@ -87,6 +88,16 @@ export default function ActivityCard(props: ActivityCardProps) {
         >
           {dayjs(activity.startDate).month() + 1}月{" "}
           {dayjs(activity.startDate).date()}日
+        </Typography>
+        <Typography
+          color="white"
+          fontSize={14}
+          sx={{
+            textAlign: "center",
+            fontWeight: 500,
+          }}
+        >
+          {getDayOfDate(activity.startDate)}
         </Typography>
         <Typography
           color="white"
