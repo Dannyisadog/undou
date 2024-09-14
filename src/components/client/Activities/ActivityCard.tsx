@@ -26,6 +26,8 @@ export default function ActivityCard(props: ActivityCardProps) {
 
   const status = getStatus(activity);
 
+  const location = `${activity.city}${activity.area} - ${activity.location}`;
+
   return (
     <Card
       sx={{
@@ -49,7 +51,7 @@ export default function ActivityCard(props: ActivityCardProps) {
         <Stack spacing={0.5}>
           <Stack direction="row" alignItems="center" spacing={1}>
             <LocationOnIcon fontSize="small" />
-            <Typography>{activity.location}</Typography>
+            <Typography>{location}</Typography>
           </Stack>
           <Stack direction="row" alignItems="center" spacing={1}>
             <AttachMoneyIcon fontSize="small" />
