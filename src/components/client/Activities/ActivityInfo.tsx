@@ -25,6 +25,8 @@ import dayjs from "dayjs";
 import { items } from "../common/Sidebar";
 import UserList, { UserListItem } from "./UserList";
 import ShareButton from "./ShareButton";
+import ActivityStatusChip from "./ActivityStatusChip";
+import { getStatus } from "util/activity";
 
 export type ParticipantWithUser = Participant & {
   user: User;
@@ -87,9 +89,12 @@ export default function ActivityInfo() {
       return participant.user;
     }) ?? [];
 
+  const status = getStatus(activity);
+
   return activity ? (
     <Stack pt={isMobileSize ? 0 : 4} width="100%" spacing={2}>
       <Title text={activity.name} />
+      <ActivityStatusChip status={status} />
       <Stack direction="row" alignItems="start" justifyContent="start">
         <ShareButton />
       </Stack>
