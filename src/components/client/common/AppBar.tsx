@@ -77,14 +77,28 @@ export default function AppBar(props: AppBarProps) {
               </Link>
             )}
             {isMobileSize && (
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                onClick={openDrawer}
-                edge="start"
-              >
-                <MenuIcon />
-              </IconButton>
+              <>
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  onClick={openDrawer}
+                  edge="start"
+                >
+                  <MenuIcon />
+                </IconButton>
+                <Link href="/">
+                  <Stack direction="row" alignItems="center">
+                    <Typography
+                      color="primary"
+                      fontSize={20}
+                      fontWeight="bold"
+                      noWrap
+                    >
+                      運動火腿
+                    </Typography>
+                  </Stack>
+                </Link>
+              </>
             )}
           </Stack>
         </Stack>
