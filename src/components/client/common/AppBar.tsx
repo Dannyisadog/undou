@@ -6,18 +6,15 @@ import {
   AppBar as MuiAppBar,
   Stack,
   Toolbar,
-  Tooltip,
   Typography,
 } from "@mui/material";
 import Image from "next/image";
-import TextField from "../TextField";
 import { useScreenSize } from "hooks/useScreenSize";
 import Link from "next/link";
 import MenuIcon from "@mui/icons-material/Menu";
 import multiavatar from "@multiavatar/multiavatar/esm";
 import Button from "../Button";
 import { useGlobalStore } from "providers/StoreProvider";
-import BugReportIcon from "@mui/icons-material/BugReport";
 
 interface AppBarProps {
   openDrawer: () => void;
@@ -90,14 +87,6 @@ export default function AppBar(props: AppBarProps) {
               </IconButton>
             )}
           </Stack>
-          <Tooltip title="運動火腿目前處於測試階段">
-            <Stack direction="row" alignItems="center">
-              <BugReportIcon />
-              <Typography fontWeight="bold" variant="body2">
-                Beta
-              </Typography>
-            </Stack>
-          </Tooltip>
         </Stack>
         <Link href="/privacy">
           <Typography fontSize={12} color="white">
