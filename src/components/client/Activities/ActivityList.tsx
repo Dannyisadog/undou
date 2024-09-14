@@ -3,7 +3,6 @@
 import { useSearchParams } from "next/navigation";
 import { getActivityItemByType } from "util/activity";
 import Title from "../Title";
-import { useCallback, useEffect, useState } from "react";
 import { Stack } from "@mui/material";
 import Link from "next/link";
 import ActivityCard from "./ActivityCard";
@@ -21,7 +20,7 @@ export default function ActivityList() {
   const { data: activities, isLoading } = useActivities(type);
 
   return (
-    <Stack width="100%" spacing={4}>
+    <Stack width="100%" spacing={2}>
       <Title hasGoBack={false} text={item ? `${item.label}活動` : "全部活動"} />
       {isLoading && <ActivityListSkeleton />}
       {!isLoading && (!activities || activities.length === 0) && <NoData />}

@@ -4,6 +4,8 @@ import Button from "../Button";
 import { ActivityWithParticipants } from "./ActivityInfo";
 import { User } from "@prisma/client";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import { getStatus } from "util/activity";
+import { ActivityStatus } from "./ActivityStatusChip";
 
 interface ActivityInfoFooterProps {
   activity: ActivityWithParticipants;
@@ -36,6 +38,7 @@ export default function ActivityInfoFooter(props: ActivityInfoFooterProps) {
   const maxParticipants = activity.maxParticipants;
   const isFull = currentParticipants >= maxParticipants;
   const isArchived = !activity.is_active;
+  const status = getStatus(activity);
 
   return (
     <Stack
@@ -87,48 +90,59 @@ export default function ActivityInfoFooter(props: ActivityInfoFooterProps) {
             </Typography>
           )}
         </Stack>
-        {activity.is_active && activity.creatorId === user?.id && (
-          <Button
-            sx={{
-              height: "100%",
-              color: "white",
-              borderRadius: 100,
-            }}
-            isLoading={archiveLoading}
-            variant="contained"
-            onClick={handleArchive}
-          >
-            <Typography>封存活動</Typography>
-          </Button>
-        )}
-        {user && !isOwner && isJoined && activity.is_active && (
-          <Button
-            sx={{
-              height: "100%",
-              color: "white",
-              borderRadius: 100,
-            }}
-            isLoading={leaveLoading}
-            variant="contained"
-            onClick={handleLeave}
-          >
-            <Typography>退出活動</Typography>
-          </Button>
-        )}
-        {user && !isOwner && !isJoined && activity.is_active && !isFull && (
-          <Button
-            sx={{
-              height: "100%",
-              color: "white",
-              borderRadius: 100,
-            }}
-            isLoading={joinLoading}
-            variant="contained"
-            onClick={handleJoin}
-          >
-            <Typography>參加活動</Typography>
-          </Button>
-        )}
+        {activity.is_active &&
+          status === ActivityStatus.ENABLED &&
+          activity.creatorId === user?.id && (
+            <Button
+              sx={{
+                height: "100%",
+                color: "white",
+                borderRadius: 100,
+              }}
+              isLoading={archiveLoading}
+              variant="contained"
+              onClick={handleArchive}
+            >
+              <Typography>封存活動</Typography>
+            </Button>
+          )}
+        {user &&
+          !isOwner &&
+          isJoined &&
+          status === ActivityStatus.ENABLED &&
+          activity.is_active && (
+            <Button
+              sx={{
+                height: "100%",
+                color: "white",
+                borderRadius: 100,
+              }}
+              isLoading={leaveLoading}
+              variant="contained"
+              onClick={handleLeave}
+            >
+              <Typography>退出活動</Typography>
+            </Button>
+          )}
+        {user &&
+          !isOwner &&
+          !isJoined &&
+          status === ActivityStatus.ENABLED &&
+          activity.is_active &&
+          !isFull && (
+            <Button
+              sx={{
+                height: "100%",
+                color: "white",
+                borderRadius: 100,
+              }}
+              isLoading={joinLoading}
+              variant="contained"
+              onClick={handleJoin}
+            >
+              <Typography>參加活動</Typography>
+            </Button>
+          )}
       </Stack>
     </Stack>
   );

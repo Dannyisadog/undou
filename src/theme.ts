@@ -17,6 +17,15 @@ export const theme = createTheme({
     primary: {
       main: "#F1712A",
     },
+    success: {
+      main: "#26bd8d",
+    },
+    warning: {
+      main: "#e0bd2f",
+    },
+    error: {
+      main: "#cf4f36",
+    },
   },
   typography: {
     fontFamily,

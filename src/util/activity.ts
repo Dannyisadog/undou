@@ -1,3 +1,5 @@
+import { Activity } from "@prisma/client";
+import { ActivityStatus } from "components/client/Activities/ActivityStatusChip";
 import { items } from "components/client/common/Sidebar";
 import dayjs from "dayjs";
 
@@ -23,5 +25,46 @@ export const getDayOfDate = (date: Date) => {
       return "星期五";
     case 6:
       return "星期六";
+  }
+};
+
+export const getStatus = (activity?: Activity): ActivityStatus => {
+  if (!activity) {
+    return ActivityStatus.ARCHIVED;
+  }
+
+  if (!activity.is_active) {
+    return ActivityStatus.ARCHIVED;
+  }
+
+  const now = dayjs();
+  const startDate = dayjs(activity.startDate);
+
+  if (now.isAfter(startDate)) {
+    return ActivityStatus.OUT_DATE;
+  }
+
+  return ActivityStatus.ENABLED;
+};
+
+export const getStatusLabel = (status: ActivityStatus) => {
+  switch (status) {
+    case ActivityStatus.ENABLED:
+      return "可報名";
+    case ActivityStatus.OUT_DATE:
+      return "已結束";
+    case ActivityStatus.ARCHIVED:
+      return "已封存";
+  }
+};
+
+export const getStatusColorType = (status: ActivityStatus) => {
+  switch (status) {
+    case ActivityStatus.ENABLED:
+      return "success";
+    case ActivityStatus.OUT_DATE:
+      return "error";
+    case ActivityStatus.ARCHIVED:
+      return "warning";
   }
 };
