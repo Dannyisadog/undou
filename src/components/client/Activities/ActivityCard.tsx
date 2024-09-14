@@ -10,7 +10,8 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import { ActivityWithParticipants } from "./ActivityInfo";
 import { useScreenSize } from "hooks/useScreenSize";
-import { getDayOfDate } from "util/activity";
+import { getDayOfDate, getStatus } from "util/activity";
+import ActivityStatusChip from "./ActivityStatusChip";
 
 interface ActivityCardProps {
   activity: ActivityWithParticipants;
@@ -23,6 +24,8 @@ export default function ActivityCard(props: ActivityCardProps) {
 
   const { isDesktopSize } = useScreenSize();
 
+  const status = getStatus(activity);
+
   return (
     <Card
       sx={{
@@ -34,7 +37,8 @@ export default function ActivityCard(props: ActivityCardProps) {
         paddingRight: "116px !important",
       }}
     >
-      <Stack spacing={1.5}>
+      <Stack spacing={1}>
+        <ActivityStatusChip status={status} />
         <Typography
           variant="h5"
           fontSize={isDesktopSize ? "1.4rem" : "1.2rem"}
