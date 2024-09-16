@@ -28,6 +28,9 @@ export default function ActivityCard(props: ActivityCardProps) {
 
   const location = `${activity.city}${activity.area} - ${activity.location}`;
 
+  const startTime = `${dayjs(activity.startDate).format("hh:mm")}`;
+  const endTime = `${dayjs(activity.endDate).format("hh:mm")}`;
+
   return (
     <Card
       sx={{
@@ -107,14 +110,13 @@ export default function ActivityCard(props: ActivityCardProps) {
         </Typography>
         <Typography
           color="white"
-          fontSize={14}
+          fontSize={12}
           sx={{
             textAlign: "center",
             fontWeight: 500,
           }}
         >
-          {dayjs(activity.startDate).hour()}:
-          {dayjs(activity.startDate).minute().toString().padStart(2, "0")}
+          {startTime}-{endTime}
         </Typography>
       </Stack>
     </Card>
