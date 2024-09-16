@@ -85,6 +85,7 @@ export default function CreateActivity() {
     <Stack spacing={2} width="100%">
       <Stack direction={direction} spacing={2} width="100%">
         <TextField
+          required
           fullWidth
           label="活動名稱"
           error={!!formik.errors.name}
@@ -96,6 +97,7 @@ export default function CreateActivity() {
           }}
         />
         <Select
+          required
           fullWidth
           placeholder="請選擇活動類型"
           label="活動類型"
@@ -113,6 +115,7 @@ export default function CreateActivity() {
       </Stack>
       <Stack direction={direction} spacing={2} width="100%">
         <DatePicker
+          required
           fullWidth
           label="活動開始時間"
           error={!!formik.errors.startDate}
@@ -122,6 +125,7 @@ export default function CreateActivity() {
           }}
         />
         <DatePicker
+          required
           fullWidth
           label="活動結束時間"
           error={!!formik.errors.endDate}
@@ -134,6 +138,7 @@ export default function CreateActivity() {
       </Stack>
       <Stack direction={direction} spacing={2} width="100%">
         <TextField
+          required
           fullWidth
           placeholder="請輸入可報名人數"
           error={!!formik.errors.maxParticipants}
@@ -145,6 +150,7 @@ export default function CreateActivity() {
           }}
         />
         <TextField
+          required
           fullWidth
           placeholder="請輸入費用"
           type="number"
@@ -176,6 +182,7 @@ export default function CreateActivity() {
       </Stack>
       <Stack direction={direction} spacing={2} width="100%">
         <TextField
+          required
           fullWidth
           placeholder="請輸入活動地點"
           label="活動地點"
@@ -186,6 +193,7 @@ export default function CreateActivity() {
           }}
         />
         <TextField
+          required
           fullWidth
           placeholder="請輸入活動地址"
           label="活動地址"
@@ -198,6 +206,7 @@ export default function CreateActivity() {
       </Stack>
       <Stack direction={direction} spacing={2} width="100%">
         <TextField
+          required
           fullWidth
           label="活動敘述"
           rows={6}
