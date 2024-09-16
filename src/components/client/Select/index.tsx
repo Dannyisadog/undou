@@ -18,6 +18,7 @@ interface SelectProps<T> {
   placeholder?: string;
   error?: boolean;
   helperText?: string;
+  required?: boolean;
 }
 
 type MenuItemValue<T> = T extends string | number ? T : never;
@@ -30,14 +31,24 @@ export default function Select<T>(props: SelectProps<T>) {
     renderLabel,
     placeholder,
     helperText,
+    required,
     ...reset
   } = props;
   return (
     <Stack width="100%" spacing={0.5}>
-      {label && (
-        <Typography fontWeight="bold" variant="body2" color={DARK_BLUE}>
-          {label}
-        </Typography>
+      {(label || required) && (
+        <Stack direction="row" alignItems="center" spacing={0.5}>
+          {required && (
+            <Typography fontWeight="bold" variant="body2" color={DARK_BLUE}>
+              *
+            </Typography>
+          )}
+          {label && (
+            <Typography fontWeight="bold" variant="body2" color={DARK_BLUE}>
+              {label}
+            </Typography>
+          )}
+        </Stack>
       )}
       <MuiSelect
         {...reset}
