@@ -12,6 +12,9 @@ import VolleyballIcon from "../components/client/common/Sidebar/ic-volleyball.pn
 import PingpongIcon from "../components/client/common/Sidebar/ic-pingpong.png";
 import GolfIcon from "../components/client/common/Sidebar/ic-golf.png";
 import BoxingIcon from "../components/client/common/Sidebar/ic-boxing.png";
+import RockClimbIcon from "../components/client/common/Sidebar/ic-rock-climbing.png";
+import FitnessIcon from "../components/client/common/Sidebar/ic-fitness.png";
+import BowlingIcon from "../components/client/common/Sidebar/ic-bowling.png";
 
 export const useTypeIcon = () => {
   const getIcon = (type: string) => {
@@ -42,6 +45,12 @@ export const useTypeIcon = () => {
         return GolfIcon;
       case "tai_chi":
         return BoxingIcon;
+      case "rock_climbing":
+        return RockClimbIcon;
+      case "fitness":
+        return FitnessIcon;
+      case "bowling":
+        return BowlingIcon;
       default:
         return AllIcon;
     }
