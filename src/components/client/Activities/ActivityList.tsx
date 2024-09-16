@@ -1,14 +1,17 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { getActivityItemByType } from "util/activity";
 import Title from "../Title";
-import { Stack } from "@mui/material";
+import { alpha, Fab, Stack } from "@mui/material";
 import Link from "next/link";
+import AddIcon from "@mui/icons-material/Add";
 import ActivityCard from "./ActivityCard";
 import ActivityListSkeleton from "./ActivityListSkeleton";
 import { useActivities } from "hooks/api/useActivities";
 import NoData from "../common/NoData";
+import { DARK_BLUE } from "colors";
+import { useScreenSize } from "hooks/useScreenSize";
 
 export default function ActivityList() {
   const searchParams = useSearchParams();
@@ -18,6 +21,10 @@ export default function ActivityList() {
   const item = getActivityItemByType(type);
 
   const { data: activities, isLoading } = useActivities(type);
+
+  const router = useRouter();
+
+  const { isMobileSize } = useScreenSize();
 
   return (
     <Stack width="100%" spacing={2}>
@@ -32,6 +39,23 @@ export default function ActivityList() {
             </Link>
           ))}
       </Stack>
+      {isMobileSize && (
+        <Fab
+          onClick={() => router.push("/activity/create")}
+          sx={{
+            position: "fixed",
+            bottom: 24,
+            right: 24,
+            backgroundColor: alpha(DARK_BLUE, 0.9),
+            color: "white",
+            ":hover": {
+              backgroundColor: DARK_BLUE,
+            },
+          }}
+        >
+          <AddIcon />
+        </Fab>
+      )}
     </Stack>
   );
 }
