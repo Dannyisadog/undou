@@ -98,7 +98,10 @@ export default function Profile() {
             </Button>
             <Button
               variant="contained"
-              disabled={newName === session.authUser.name}
+              disabled={
+                newName === session.authUser.name ||
+                modifyUserNameMutation.isLoading
+              }
               onClick={modifyName}
               isLoading={modifyUserNameMutation.isLoading}
               sx={{

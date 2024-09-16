@@ -6,16 +6,27 @@ import {
 } from "@mui/material";
 import { DARK_BLUE } from "colors";
 
-type TextFieldProps = MuiTextFieldProps;
+type TextFieldProps = {
+  required?: boolean;
+} & MuiTextFieldProps;
 
 export default function TextField(props: TextFieldProps) {
-  const { label, ...rest } = props;
+  const { required, label, ...rest } = props;
   return (
     <Stack width="100%" spacing={0.5}>
-      {label && (
-        <Typography fontWeight="bold" variant="body2" color={DARK_BLUE}>
-          {label}
-        </Typography>
+      {(label || required) && (
+        <Stack direction="row" alignItems="center" spacing={0.5}>
+          {required && (
+            <Typography fontWeight="bold" variant="body2" color={DARK_BLUE}>
+              *
+            </Typography>
+          )}
+          {label && (
+            <Typography fontWeight="bold" variant="body2" color={DARK_BLUE}>
+              {label}
+            </Typography>
+          )}
+        </Stack>
       )}
       <MuiTextField
         sx={{

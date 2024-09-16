@@ -14,17 +14,27 @@ interface DateTimePickerProps extends MuiDateTimePickerProps<Dayjs> {
   fullWidth?: boolean;
   error?: boolean;
   helperText?: string;
+  required?: boolean;
 }
 
 export default function DatePicker(props: DateTimePickerProps) {
-  const { fullWidth, label, error, helperText, ...rest } = props;
+  const { fullWidth, label, error, helperText, required, ...rest } = props;
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Stack width="100%" spacing={0.5}>
-        {label && (
-          <Typography fontWeight="bold" variant="body2" color={DARK_BLUE}>
-            {label}
-          </Typography>
+        {(label || required) && (
+          <Stack direction="row" alignItems="center" spacing={0.5}>
+            {required && (
+              <Typography fontWeight="bold" variant="body2" color={DARK_BLUE}>
+                *
+              </Typography>
+            )}
+            {label && (
+              <Typography fontWeight="bold" variant="body2" color={DARK_BLUE}>
+                {label}
+              </Typography>
+            )}
+          </Stack>
         )}
         <MuiDateTimePicker
           format="YYYY/MM/DD HH:mm"

@@ -19,6 +19,7 @@ export default function AreaSelect(props: AreaSelectProps) {
 
   return (
     <Select
+      required
       fullWidth
       placeholder="請選擇區域"
       label="區域"
