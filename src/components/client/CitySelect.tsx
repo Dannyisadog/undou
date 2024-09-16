@@ -16,6 +16,7 @@ export default function CitySelect(props: CitySelectProps) {
 
   return (
     <Select
+      required
       fullWidth
       placeholder="請選擇活動縣市"
       label="縣市"
