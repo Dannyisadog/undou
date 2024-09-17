@@ -12,6 +12,7 @@ import { ActivityWithParticipants } from "./ActivityInfo";
 import { useScreenSize } from "hooks/useScreenSize";
 import { getDayOfDate, getStatus } from "util/activity";
 import ActivityStatusChip from "./ActivityStatusChip";
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 
 interface ActivityCardProps {
   activity: ActivityWithParticipants;
@@ -43,7 +44,15 @@ export default function ActivityCard(props: ActivityCardProps) {
       }}
     >
       <Stack spacing={1}>
-        <ActivityStatusChip status={status} />
+        <Stack direction="row" spacing={1}>
+          <ActivityStatusChip status={status} />
+          {activity.comments.length > 0 && (
+            <Stack direction="row" alignItems="center" spacing={0.5}>
+              <ChatBubbleOutlineIcon fontSize="small" />
+              <Typography>{activity.comments.length}</Typography>
+            </Stack>
+          )}
+        </Stack>
         <Typography
           variant="h5"
           fontSize={isDesktopSize ? "1.4rem" : "1.2rem"}
