@@ -37,6 +37,7 @@ export const list = async (params: ListParams): Promise<Activity[]> => {
           is_deleted: false,
         },
       },
+      comments: true,
     },
     orderBy: {
       updatedAt: "desc",
@@ -58,6 +59,7 @@ export const listJoined = async () => {
       activity: {
         include: {
           owner: true,
+          comments: true,
           participants: {
             where: {
               is_deleted: false,
