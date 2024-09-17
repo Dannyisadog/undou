@@ -20,4 +20,5 @@ model Activity {
   participants    Participant[]
   owner           User          @relation(fields: [creatorId], references: [id])
   userId          Int?
+  comments        Comment[]
 }
