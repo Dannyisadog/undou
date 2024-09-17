@@ -85,6 +85,7 @@ export default function CommentBlock(props: CommentBlockProps) {
   const {
     data: comments,
     isLoading,
+    isFetching,
     refetch: refetchComments,
   } = useComments(activityId);
 
@@ -108,7 +109,7 @@ export default function CommentBlock(props: CommentBlockProps) {
         <Typography variant="h5">討論區</Typography>
         <IconButton
           onClick={() => {
-            refetchComments;
+            refetchComments();
           }}
         >
           <RefreshIcon
@@ -118,15 +119,17 @@ export default function CommentBlock(props: CommentBlockProps) {
           />
         </IconButton>
       </Stack>
-      {isLoading && (
+      {(isLoading || isFetching) && (
         <Stack alignItems="center">
           <CircularProgress size={30} />
         </Stack>
       )}
       <Stack spacing={2}>
-        {comments?.map((comment) => (
-          <CommentItem key={comment.id} comment={comment} />
-        ))}
+        {!isLoading &&
+          !isFetching &&
+          comments?.map((comment) => (
+            <CommentItem key={comment.id} comment={comment} />
+          ))}
         {comments?.length === 0 && (
           <Typography variant="body1" fontWeight="bold" color="primary">
             目前沒有任何留言
