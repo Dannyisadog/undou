@@ -1,6 +1,13 @@
 "use client";
 
-import { alpha, Avatar, IconButton, Stack, Typography } from "@mui/material";
+import {
+  alpha,
+  Avatar,
+  CircularProgress,
+  IconButton,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { useGlobalStore } from "providers/StoreProvider";
 import TextField from "../TextField";
 import { useState } from "react";
@@ -111,6 +118,11 @@ export default function CommentBlock(props: CommentBlockProps) {
           />
         </IconButton>
       </Stack>
+      {isLoading && (
+        <Stack alignItems="center">
+          <CircularProgress size={30} />
+        </Stack>
+      )}
       <Stack spacing={2}>
         {comments?.map((comment) => (
           <CommentItem key={comment.id} comment={comment} />
