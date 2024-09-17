@@ -1,6 +1,6 @@
 "use client";
 
-import { Activity, Participant, User } from "@prisma/client";
+import { Activity, Comment, Participant, User } from "@prisma/client";
 import Title from "../Title";
 import { Box, CircularProgress, Stack, Typography } from "@mui/material";
 import { useState } from "react";
@@ -36,6 +36,7 @@ export type ParticipantWithUser = Participant & {
 export type ActivityWithParticipants = Activity & {
   participants: ParticipantWithUser[];
   owner: User;
+  comments: Comment[];
 };
 
 export default function ActivityInfo() {
