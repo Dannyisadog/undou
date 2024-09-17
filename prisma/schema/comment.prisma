@@ -1,0 +1,11 @@
+model Comment {
+  id         Int      @id @default(autoincrement())
+  creatorId  Int
+  activityId Int
+  content    String
+  isDeleted  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  creator  User     @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  activity Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
+}

@@ -13,4 +13,6 @@ model User {
   sessions      Session[]
   participants  Participant[]
   Activity      Activity[]
+
+  comments Comment[]
 }
