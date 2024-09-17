@@ -27,6 +27,7 @@ import UserList, { UserListItem } from "./UserList";
 import ShareButton from "./ShareButton";
 import ActivityStatusChip from "./ActivityStatusChip";
 import { getStatus } from "util/activity";
+import CommentBlock from "./CommentBlock";
 
 export type ParticipantWithUser = Participant & {
   user: User;
@@ -108,7 +109,6 @@ export default function ActivityInfo() {
           p: 3,
           borderRadius: 4,
           backgroundColor: "white",
-          mb: "64px !important",
         }}
       >
         <Stack spacing={2} width="100%">
@@ -159,6 +159,19 @@ export default function ActivityInfo() {
             <UserList users={joinedUser} />
           </Stack>
         </Stack>
+      </Stack>
+      <Stack
+        spacing={2}
+        width="100%"
+        maxWidth="1080px"
+        sx={{
+          mb: "80px !important",
+          p: 3,
+          backgroundColor: "white",
+          borderRadius: 4,
+        }}
+      >
+        <CommentBlock activityId={id as string} />
       </Stack>
       <ActivityInfoFooter
         handleJoin={handleJoin}
